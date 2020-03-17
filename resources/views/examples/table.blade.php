@@ -9,98 +9,68 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header"><strong>Basic Form</strong> Elements</div>
+                                {{ Form::open(['route' => 'home', 'files' => true, 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
-                                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label" for="text-input">Text Input</label>
-                                            <div class="col-md-4">
-                                                <input class="form-control" id="text-input" type="text"
-                                                       name="text-input" placeholder="Text"><span
-                                                    class="help-block">This is a help text</span>
+                                    <div class="form-group row">
+                                        {{ Form::label('text-input', 'Text Input', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::text('text-input', null, ['id' => 'text-input', 'class' => 'form-control']) }}
+                                            <span class="help-block">This is a help text</span>
+                                        </div>
+                                        {{ Form::label('email-input', 'Email Input', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::email('email-input', null, ['id' => 'email-input', 'class' => 'form-control']) }}
+                                            <span class="help-block">Please enter your email</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('select1', 'Select', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('select1', [1 => 'Option1', 2 => 'Option2', 3 => 'Option3'], null, ['id' => 'select1', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                        {{ Form::label('select2', 'Select', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('select2', [1 => 'Option1', 2 => 'Option2', 3 => 'Option3'], null, ['id' => 'select2', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label(null, 'Inline Radios', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4 col-form-label">
+                                            <div class="form-check form-check-inline mr-1">
+                                                {{ Form::radio('inline-radios', 1, true, ['id' => 'inline-radio1', 'class' => 'form-check-input']) }}
+                                                {{ Form::label('inline-radio1', 'Option 1', ['class' => 'form-check-label']) }}
                                             </div>
-                                            <label class="col-md-2 col-form-label" for="email-input">Email Input</label>
-                                            <div class="col-md-4">
-                                                <input class="form-control" id="email-input" type="email"
-                                                       name="email-input" placeholder="Enter Email"
-                                                       autocomplete="email">
-                                                <span class="help-block">Please enter your email</span>
+                                            <div class="form-check form-check-inline mr-1">
+                                                {{ Form::radio('inline-radios', 2, false, ['id' => 'inline-radio2', 'class' => 'form-check-input']) }}
+                                                {{ Form::label('inline-radio2', 'Option 2', ['class' => 'form-check-label']) }}
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                {{ Form::radio('inline-radios', 3, false, ['id' => 'inline-radio3', 'class' => 'form-check-input']) }}
+                                                {{ Form::label('inline-radio3', 'Option 3', ['class' => 'form-check-label']) }}
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label"
-                                                   for="select1">Select</label>
-                                            <div class="col-md-4">
-                                                <select class="form-control" id="select1" name="select1">
-                                                    <option value="0">Please select</option>
-                                                    <option value="1">Option #1</option>
-                                                    <option value="2">Option #2</option>
-                                                    <option value="3">Option #3</option>
-                                                </select>
+                                        {{ Form::label(null, 'Inline Checkboxes', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4 col-form-label">
+                                            <div class="form-check form-check-inline mr-1">
+                                                {{ Form::checkbox('inline-check', 1, true, ['id' => 'inline-check1', 'class' => 'form-check-input']) }}
+                                                {{ Form::label('inline-check1', 'Option 1', ['class' => 'form-check-label']) }}
                                             </div>
-                                            <label class="col-md-2 col-form-label"
-                                                   for="select1">Select</label>
-                                            <div class="col-md-4">
-                                                <select class="form-control" id="select1" name="select1">
-                                                    <option value="0">Please select</option>
-                                                    <option value="1">Option #1</option>
-                                                    <option value="2">Option #2</option>
-                                                    <option value="3">Option #3</option>
-                                                </select>
+                                            <div class="form-check form-check-inline mr-1">
+                                                {{ Form::checkbox('inline-check', 2, false, ['id' => 'inline-check2', 'class' => 'form-check-input']) }}
+                                                {{ Form::label('inline-check2', 'Option 2', ['class' => 'form-check-label']) }}
+                                            </div>
+                                            <div class="form-check form-check-inline mr-1">
+                                                {{ Form::checkbox('inline-check', 3, false, ['id' => 'inline-check3', 'class' => 'form-check-input']) }}
+                                                {{ Form::label('inline-check3', 'Option 3', ['class' => 'form-check-label']) }}
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Inline Radios</label>
-                                            <div class="col-md-4 col-form-label">
-                                                <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" id="inline-radio1"
-                                                           type="radio" value="option1"
-                                                           name="inline-radios">
-                                                    <label class="form-check-label"
-                                                           for="inline-radio1">One</label>
-                                                </div>
-                                                <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" id="inline-radio2"
-                                                           type="radio" value="option2"
-                                                           name="inline-radios">
-                                                    <label class="form-check-label"
-                                                           for="inline-radio2">Two</label>
-                                                </div>
-                                                <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" id="inline-radio3"
-                                                           type="radio" value="option3"
-                                                           name="inline-radios">
-                                                    <label class="form-check-label"
-                                                           for="inline-radio3">Three</label>
-                                                </div>
-                                            </div>
-                                            <label class="col-md-2 col-form-label">Inline Checkboxes</label>
-                                            <div class="col-md-4 col-form-label">
-                                                <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" id="inline-checkbox1"
-                                                           type="checkbox" value="check1">
-                                                    <label class="form-check-label"
-                                                           for="inline-checkbox1">One</label>
-                                                </div>
-                                                <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" id="inline-checkbox2"
-                                                           type="checkbox" value="check2">
-                                                    <label class="form-check-label"
-                                                           for="inline-checkbox2">Two</label>
-                                                </div>
-                                                <div class="form-check form-check-inline mr-1">
-                                                    <input class="form-check-input" id="inline-checkbox3"
-                                                           type="checkbox" value="check3">
-                                                    <label class="form-check-label"
-                                                           for="inline-checkbox3">Three</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-                                    <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
+                                    {{ Form::submit('Submit', ['class' => 'btn btn-sm btn-primary']) }}
+                                    {{ Form::reset('Reset', ['class' => 'btn btn-sm btn-danger']) }}
                                 </div>
+                                {{ Form::close() }}
                             </div>
                             <div class="card">
                                 <div class="card-header"> Striped Table</div>
@@ -158,7 +128,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
