@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/example', function () {
-    return view('example');
+    return view('examples.all');
+});
+Route::get('/form', function () {
+    return view('examples.form');
+});
+Route::get('/table', function () {
+    return view('examples.table');
 });
 
 Route::get('/', function () {

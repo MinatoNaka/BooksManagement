@@ -5,7 +5,9 @@
     <div class="c-wrapper">
         @include('partial.header')
         <div class="c-body">
-            @yield('main')
+            <main class="c-main">
+                @yield('main')
+            </main>
             @include('partial.footer')
         </div>
     </div>
