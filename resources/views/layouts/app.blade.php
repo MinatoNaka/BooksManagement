@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
+    <body class="c-app">
     @include('partial.menu')
     <div class="c-wrapper">
         @include('partial.header')
@@ -11,4 +12,5 @@
             @include('partial.footer')
         </div>
     </div>
+    </body>
 @endsection
