@@ -36,4 +36,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @var array
+     */
+    protected $dates = [
+        'birthday',
+    ];
+
+    /**
+     * @return string
+     */
+    public function getFormattedBirthdayAttribute(): string
+    {
+        return $this->birthday->format('Y/m/d');
+    }
 }

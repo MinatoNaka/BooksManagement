@@ -16,6 +16,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'minato.naka@asia-quest.jp',
         ]);
 
-        factory(\App\Models\User::class, 10)->create();
+        factory(\App\Models\User::class, 30)->create();
     }
 }
