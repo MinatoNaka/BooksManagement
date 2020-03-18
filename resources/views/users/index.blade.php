@@ -38,10 +38,10 @@
                                     <table class="table table-responsive-sm table-striped">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Birthday</th>
+                                            <th>@sortablelink('id', 'ID')</th>
+                                            <th>@sortablelink('name', 'Name')</th>
+                                            <th>@sortablelink('email', 'Email')</th>
+                                            <th>@sortablelink('birthday', 'Birthday')</th>
                                         </tr>
                                         </thead>
                                         <tbody>

@@ -25,6 +25,6 @@ class UserService
             $users->where('email', 'like', "%{$searchParams['email']}%");
         }
 
-        return $users->paginate(15);
+        return $users->sortable()->paginate(15);
     }
 }
