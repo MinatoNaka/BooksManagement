@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('users.index') }}
+@endsection
+
 @section('main')
     <div class="container-fluid">
         <div id="ui-view">
