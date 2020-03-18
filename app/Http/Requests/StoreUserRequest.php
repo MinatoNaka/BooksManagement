@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserRequest extends FormRequest
@@ -27,7 +28,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed'], //todo カスタムのパスワードバリデーション実装
+            'password' => ['required', 'confirmed', new Password()],
             'birthday' => ['required', 'date'],
         ];
     }

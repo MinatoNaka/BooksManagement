@@ -36,7 +36,7 @@
                                     <div class="form-group row">
                                         {{ Form::label('password', 'Password', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            {{ Form::password('password', ['id' => 'password', 'class' => ($errors->has('email')) ? 'form-control is-invalid': 'form-control']) }}
+                                            {{ Form::password('password', ['id' => 'password', 'class' => ($errors->has('password')) ? 'form-control is-invalid': 'form-control']) }}
                                             @error('password')
                                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                             @enderror
