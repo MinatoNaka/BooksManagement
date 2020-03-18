@@ -46,8 +46,8 @@ class UsersController extends Controller
     public function store(StoreUserRequest $request): RedirectResponse
     {
         $this->service->save($request->validated());
+        flash('ユーザが登録されました。')->success();
 
-        //todo 登録完了フラッシュメッセージを表示
         return redirect()->route('users.index');
     }
 }
