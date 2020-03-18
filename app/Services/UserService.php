@@ -27,4 +27,9 @@ class UserService
 
         return $users->sortable()->paginate(15);
     }
+
+    public function save(array $params)
+    {
+        return User::create($params);
+    }
 }
