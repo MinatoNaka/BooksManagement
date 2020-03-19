@@ -42,6 +42,7 @@
                                             <th>@sortablelink('name', 'ユーザ名')</th>
                                             <th>@sortablelink('email', 'メールアドレス')</th>
                                             <th>@sortablelink('birthday', '生年月日')</th>
+                                            <th>操作</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -51,6 +52,13 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->formatted_birthday}}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-sm btn-outline-info" type="button">詳細</a>
+                                                    <a href="{{ route('users.edit', $user) }}"
+                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger"
+                                                       type="button">削除</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
