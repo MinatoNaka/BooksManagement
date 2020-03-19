@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'ユーザ一覧')
+
 @section('breadcrumbs')
     {{ Breadcrumbs::render('users.index') }}
 @endsection
