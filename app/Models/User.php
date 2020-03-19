@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Kyslik\ColumnSortable\Sortable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Sortable;
+    use Notifiable, Sortable, FormAccessible;
 
     /**
      * The attributes that are mass assignable.
@@ -48,12 +49,38 @@ class User extends Authenticatable
         'id', 'name', 'email', 'birthday',
     ];
 
-
     /**
      * @return string
      */
     public function getFormattedBirthdayAttribute(): string
     {
         return $this->birthday->format('Y/m/d');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormattedCreatedAtAttribute(): string
+    {
+        return $this->created_at->format('Y/m/d H:i:s');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormattedUpdatedAtAttribute(): string
+    {
+        return $this->updated_at->format('Y/m/d H:i:s');
+    }
+
+    /**
+     * モデルバインドフォームに生年月日を表示する際にフォーマット
+     *
+     * @param $value
+     * @return string
+     */
+    public function formBirthdayAttribute($value): string
+    {
+        return $value->format('Y-m-d');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,8 +47,30 @@ class UsersController extends Controller
      */
     public function store(StoreUserRequest $request): RedirectResponse
     {
-        $this->service->save($request->validated());
+        $this->service->store($request->validated());
         flash('ユーザが登録されました。')->success();
+
+        return redirect()->route('users.index');
+    }
+
+    /**
+     * @param User $user
+     * @return View
+     */
+    public function edit(User $user): View
+    {
+        return view('users.edit')->with(compact('user'));
+    }
+
+    /**
+     * @param User $user
+     * @param UpdateUserRequest $request
+     * @return RedirectResponse
+     */
+    public function update(User $user, UpdateUserRequest $request): RedirectResponse
+    {
+        $this->service->update($user, $request->validated());
+        flash('ユーザが更新されました。')->success();
 
         return redirect()->route('users.index');
     }

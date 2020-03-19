@@ -28,8 +28,22 @@ class UserService
         return $users->sortable()->paginate(15);
     }
 
-    public function save(array $params)
+    /**
+     * @param array $params
+     * @return User
+     */
+    public function store(array $params): User
     {
         return User::create($params);
+    }
+
+    /**
+     * @param User $user
+     * @param array $params
+     * @return bool
+     */
+    public function update(User $user, array $params): bool
+    {
+        return $user->update($params);
     }
 }
