@@ -31,10 +31,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //     el: '#app',
 // });
 
-$(function () {
-    $('[data-toggle="popover"]').popover()
-});
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
+// $(function () {
+//     $('[data-toggle="popover"]').popover()
+// });
+//
+// $(function () {
+//     $('[data-toggle="tooltip"]').tooltip()
+// });

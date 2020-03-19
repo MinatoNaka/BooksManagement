@@ -3,7 +3,7 @@
 @section('content')
     <body class="c-app">
     @include('partial.menu')
-    <div class="c-wrapper">
+    <div id="app" class="c-wrapper">
         @include('partial.header')
         <div class="c-body">
             <main class="c-main">
@@ -15,5 +15,6 @@
             @include('partial.footer')
         </div>
     </div>
+    @stack('scripts')
     </body>
 @endsection
