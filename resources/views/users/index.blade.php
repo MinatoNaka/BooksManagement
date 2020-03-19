@@ -53,11 +53,13 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->formatted_birthday}}</td>
                                                 <td>
-                                                    <a href="{{ route('users.show', $user) }}" class="btn btn-sm btn-outline-info" type="button">詳細</a>
+                                                    <a href="{{ route('users.show', $user) }}"
+                                                       class="btn btn-sm btn-outline-info" type="button">詳細</a>
                                                     <a href="{{ route('users.edit', $user) }}"
                                                        class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    <a href="#" class="btn btn-sm btn-outline-danger"
-                                                       type="button">削除</a>
+                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user], 'class' => 'd-inline']) }}
+                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                    {{ Form::close() }}
                                                 </td>
                                             </tr>
                                         @endforeach

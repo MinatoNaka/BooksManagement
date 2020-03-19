@@ -46,4 +46,14 @@ class UserService
     {
         return $user->update($params);
     }
+
+    /**
+     * @param User $user
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function destroy(User $user): ?bool
+    {
+        return $user->delete();
+    }
 }

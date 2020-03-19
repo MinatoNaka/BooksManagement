@@ -83,4 +83,17 @@ class UsersController extends Controller
     {
         return view('users.show')->with(compact('user'));
     }
+
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(User $user): RedirectResponse
+    {
+        $this->service->destroy($user);
+        flash('ユーザが削除されました。')->success();
+
+        return redirect()->route('users.index');
+    }
 }

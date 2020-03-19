@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Collective\Html\Eloquent\FormAccessible;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Kyslik\ColumnSortable\Sortable;
@@ -10,7 +11,7 @@ use Wildside\Userstamps\Userstamps;
 
 class User extends Authenticatable
 {
-    use Notifiable, Sortable, FormAccessible, Userstamps;
+    use Notifiable, Sortable, FormAccessible, Userstamps, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
