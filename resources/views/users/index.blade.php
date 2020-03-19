@@ -79,18 +79,5 @@
 @endsection
 
 @push('scripts')
-    <script>
-        const app = new Vue({
-            el: '#app',
-            methods: {
-                confirm: function (event) {
-                    if (window.confirm('ユーザを削除してよろしいですか？')) {
-                        return;
-                    }
-
-                    event.preventDefault();
-                }
-            }
-        });
-    </script>
+    <script src="{{ mix('js/views/users/index.js') }}" defer></script>
 @endpush
