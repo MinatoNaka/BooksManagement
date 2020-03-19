@@ -12,11 +12,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header"><strong>Basic Form</strong> Elements</div>
+                                <div class="card-header">ユーザ登録</div>
                                 {{ Form::open(['route' => 'users.store', 'files' => true, 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        {{ Form::label('name', 'Name', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('name', 'ユーザ名', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             {{ Form::text('name', null, ['id' => 'name', 'class' => ($errors->has('name')) ? 'form-control is-invalid': 'form-control']) }}
                                             @error('name')
@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('email', 'Email', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('email', 'メールアドレス', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             {{ Form::text('email', null, ['id' => 'email', 'class' => ($errors->has('email')) ? 'form-control is-invalid': 'form-control']) }}
                                             @error('email')
@@ -34,7 +34,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('password', 'Password', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('password', 'パスワード', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             {{ Form::password('password', ['id' => 'password', 'class' => ($errors->has('password')) ? 'form-control is-invalid': 'form-control']) }}
                                             @error('password')
@@ -43,13 +43,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('password-confirmation', 'Confirm Password', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('password-confirmation', 'パスワード確認用', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             {{ Form::password('password_confirmation', ['id' => 'password-confirmation', 'class' => 'form-control']) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('birthday', 'Birthday', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('birthday', '生年月日', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             {{ Form::date('birthday', null, ['id' => 'birthday', 'class' => ($errors->has('birthday')) ? 'form-control is-invalid': 'form-control']) }}
                                             @error('birthday')
@@ -59,8 +59,8 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{ Form::submit('Submit', ['class' => 'btn btn-sm btn-primary']) }}
-                                    {{ Form::reset('Reset', ['class' => 'btn btn-sm btn-danger']) }}
+                                    {{ Form::submit('登録', ['class' => 'btn btn-sm btn-primary']) }}
+                                    {{ Form::reset('リセット', ['class' => 'btn btn-sm btn-danger']) }}
                                 </div>
                                 {{ Form::close() }}
                             </div>

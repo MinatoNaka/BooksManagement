@@ -12,23 +12,23 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
-                                <div class="card-header"><strong>Basic Form</strong> Elements</div>
+                                <div class="card-header">検索</div>
                                 {{ Form::open(['method' => 'GET', 'route' => 'users.index', 'files' => true, 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        {{ Form::label('name', 'Name', ['class' => 'col-md-2 col-form-label']) }}
+                                        {{ Form::label('name', 'ユーザ名', ['class' => 'col-md-2 col-form-label']) }}
                                         <div class="col-md-4">
                                             {{ Form::text('name', request('name'), ['id' => 'name', 'class' => 'form-control']) }}
                                         </div>
-                                        {{ Form::label('email', 'Email', ['class' => 'col-md-2 col-form-label']) }}
+                                        {{ Form::label('email', 'メールアドレス', ['class' => 'col-md-2 col-form-label']) }}
                                         <div class="col-md-4">
                                             {{ Form::text('email', request('email'), ['id' => 'email', 'class' => 'form-control']) }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{ Form::submit('Submit', ['class' => 'btn btn-sm btn-primary']) }}
-                                    {{ Form::reset('Reset', ['class' => 'btn btn-sm btn-danger']) }}
+                                    {{ Form::submit('検索', ['class' => 'btn btn-sm btn-primary']) }}
+                                    {{ Form::reset('リセット', ['class' => 'btn btn-sm btn-danger']) }}
                                 </div>
                                 {{ Form::close() }}
                             </div>
@@ -39,9 +39,9 @@
                                         <thead>
                                         <tr>
                                             <th>@sortablelink('id', 'ID')</th>
-                                            <th>@sortablelink('name', 'Name')</th>
-                                            <th>@sortablelink('email', 'Email')</th>
-                                            <th>@sortablelink('birthday', 'Birthday')</th>
+                                            <th>@sortablelink('name', 'ユーザ名')</th>
+                                            <th>@sortablelink('email', 'メールアドレス')</th>
+                                            <th>@sortablelink('birthday', '生年月日')</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -55,7 +55,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    {!! $users->links() !!}
+                                    {{ $users->links() }}
                                 </div>
                             </div>
                         </div>
