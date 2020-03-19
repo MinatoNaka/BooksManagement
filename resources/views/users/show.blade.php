@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('users.edit', $user) }}
+    {{ Breadcrumbs::render('users.show', $user) }}
 @endsection
 
 @section('main')
@@ -12,8 +12,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header">ユーザ編集</div>
-                                {{ Form::model($user, ['method' => 'PUT', 'route' => ['users.update', $user], 'files' => true, 'class' => 'form-horizontal']) }}
+                                <div class="card-header">ユーザ詳細</div>
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('id', 'ID', ['class' => 'col-md-3 col-form-label']) }}
@@ -24,28 +23,19 @@
                                     <div class="form-group row">
                                         {{ Form::label('name', 'ユーザ名', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            {{ Form::text('name', null, ['id' => 'name', 'class' => ($errors->has('name')) ? 'form-control is-invalid': 'form-control']) }}
-                                            @error('name')
-                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                            @enderror
+                                            <p class="form-control-static">{{ $user->name }}</p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         {{ Form::label('email', 'メールアドレス', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            {{ Form::text('email', null, ['id' => 'email', 'class' => ($errors->has('email')) ? 'form-control is-invalid': 'form-control']) }}
-                                            @error('email')
-                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                            @enderror
+                                            <p class="form-control-static">{{ $user->email }}</p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         {{ Form::label('birthday', '生年月日', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            {{ Form::date('birthday', null, ['id' => 'birthday', 'class' => ($errors->has('birthday')) ? 'form-control is-invalid': 'form-control']) }}
-                                            @error('birthday')
-                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                            @enderror
+                                            <p class="form-control-static">{{ $user->formatted_birthday }}</p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -74,10 +64,8 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{ Form::submit('更新', ['class' => 'btn btn-sm btn-primary']) }}
-                                    {{ Form::reset('リセット', ['class' => 'btn btn-sm btn-danger']) }}
+                                    <a href="{{ route('users.index') }}" class="btn btn-sm btn-primary">戻る</a>
                                 </div>
-                                {{ Form::close() }}
                             </div>
                         </div>
                     </div>

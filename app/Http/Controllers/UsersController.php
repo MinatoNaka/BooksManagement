@@ -74,4 +74,13 @@ class UsersController extends Controller
 
         return redirect()->route('users.index');
     }
+
+    /**
+     * @param User $user
+     * @return View
+     */
+    public function show(User $user): View
+    {
+        return view('users.show')->with(compact('user'));
+    }
 }

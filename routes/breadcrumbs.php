@@ -13,3 +13,13 @@ Breadcrumbs::for('users.create', function ($trail) {
     $trail->parent('users.index');
     $trail->push('Create', route('users.create'));
 });
+
+Breadcrumbs::for('users.edit', function ($trail, $user) {
+    $trail->parent('users.index');
+    $trail->push('Edit', route('users.edit', $user));
+});
+
+Breadcrumbs::for('users.show', function ($trail, $user) {
+    $trail->parent('users.index');
+    $trail->push('Show', route('users.show', $user));
+});
