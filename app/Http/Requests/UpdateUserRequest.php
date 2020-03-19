@@ -30,7 +30,7 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users', 'email')->ignore($this->user())
+                Rule::unique('users', 'email')->ignore($this->route('user'))
             ],
             'birthday' => ['required', 'date'],
         ];
