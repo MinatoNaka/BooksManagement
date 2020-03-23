@@ -85,8 +85,8 @@
                                                 <td>
                                                     {{--                                                    <a href="{{ route('books.show', $book) }}"--}}
                                                     {{--                                                       class="btn btn-sm btn-outline-info" type="button">詳細</a>--}}
-                                                    {{--                                                    <a href="{{ route('books.edit', $book) }}"--}}
-                                                    {{--                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>--}}
+                                                    <a href="{{ route('books.edit', $book) }}"
+                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
                                                     {{--                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['books.destroy', $book], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}--}}
                                                     {{--                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}--}}
                                                     {{--                                                    {{ Form::close() }}--}}

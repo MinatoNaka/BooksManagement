@@ -53,3 +53,8 @@ Breadcrumbs::for('books.create', function ($trail) {
     $trail->parent('books.index');
     $trail->push('Create', route('books.create'));
 });
+
+Breadcrumbs::for('books.edit', function ($trail, $book) {
+    $trail->parent('books.index');
+    $trail->push('Edit', route('books.edit', $book));
+});

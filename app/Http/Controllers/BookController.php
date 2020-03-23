@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\BookService;
@@ -57,5 +58,17 @@ class BookController extends Controller
         flash('本が登録されました。')->success();
 
         return redirect()->route('books.index');
+    }
+
+    /**
+     * @param Book $book
+     * @return View
+     */
+    public function edit(Book $book): View
+    {
+        $authors = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
+
+        return view('books.edit')->with(compact('book', 'authors', 'categories'));
     }
 }

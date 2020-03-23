@@ -46,6 +46,33 @@ class Book extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getFormattedCreatedAtAttribute(): string
+    {
+        return $this->created_at->format('Y/m/d H:i:s');
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormattedUpdatedAtAttribute(): string
+    {
+        return $this->updated_at->format('Y/m/d H:i:s');
+    }
+
+    /**
+     * モデルバインドフォームに出版日を表示する際にフォーマット
+     *
+     * @param $value
+     * @return string
+     */
+    public function formPublishedAtAttribute($value): string
+    {
+        return $value->format('Y-m-d');
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function categories(): BelongsToMany
