@@ -48,6 +48,9 @@ class User extends Authenticatable
         'birthday',
     ];
 
+    /**
+     * @var array
+     */
     public $sortable = [
         'id', 'name', 'email', 'birthday',
     ];

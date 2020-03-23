@@ -43,3 +43,8 @@ Breadcrumbs::for('categories.show', function ($trail, $category) {
     $trail->parent('categories.index');
     $trail->push('Show', route('categories.show', $category));
 });
+
+Breadcrumbs::for('books.index', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Books', route('books.index'));
+});

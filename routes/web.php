@@ -59,6 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('categories/{category}', 'CategoryController@update')->name('categories.update')->middleware('can:update,category');
     Route::get('categories/{category}', 'CategoryController@show')->name('categories.show')->middleware('can:view,category');
     Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit')->middleware('can:update,category');
+
+    /* ------------------------------------------------------------------- *
+     * Book
+     * ------------------------------------------------------------------- */
+    Route::get('books', 'BookController@index')->name('books.index');
 });
 
 
