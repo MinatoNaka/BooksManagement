@@ -64,6 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
      * Book
      * ------------------------------------------------------------------- */
     Route::get('books', 'BookController@index')->name('books.index');
+    Route::post('books', 'BookController@store')->name('books.store');
+    Route::get('books/create', 'BookController@create')->name('books.create');
 });
 
 

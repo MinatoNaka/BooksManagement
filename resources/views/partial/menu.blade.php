@@ -45,7 +45,7 @@
                     <a class="c-sidebar-nav-link" href="{{ route('books.index') }}">List</a>
                 </li>
                 <li class="c-sidebar-nav-item">
-{{--                    <a class="c-sidebar-nav-link" href="{{ route('books.create') }}">Create</a>--}}
+                    <a class="c-sidebar-nav-link" href="{{ route('books.create') }}">Create</a>
                 </li>
             </ul>
         </li>

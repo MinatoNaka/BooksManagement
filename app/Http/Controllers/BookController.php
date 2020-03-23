@@ -33,4 +33,15 @@ class BookController extends Controller
 
         return view('books.index')->with(compact('books', 'authors', 'categories'));
     }
+
+    /**
+     * @return View
+     */
+    public function create(): View
+    {
+        $authors = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
+
+        return view('books.create')->with(compact('authors', 'categories'));
+    }
 }
