@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('books', 'BookController@store')->name('books.store');
     Route::get('books/create', 'BookController@create')->name('books.create');
     Route::put('books/{book}', 'BookController@update')->name('books.update');
+    Route::get('books/{book}', 'BookController@show')->name('books.show');
     Route::get('books/{book}/edit', 'BookController@edit')->name('books.edit');
 });
 

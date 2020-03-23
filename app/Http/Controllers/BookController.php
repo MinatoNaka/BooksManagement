@@ -88,4 +88,13 @@ class BookController extends Controller
 
         return redirect()->route('books.index');
     }
+
+    /**
+     * @param Book $book
+     * @return View
+     */
+    public function show(Book $book): View
+    {
+        return view('books.show')->with(compact('book'));
+    }
 }
