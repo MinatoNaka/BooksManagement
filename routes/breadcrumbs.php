@@ -23,3 +23,8 @@ Breadcrumbs::for('users.show', function ($trail, $user) {
     $trail->parent('users.index');
     $trail->push('Show', route('users.show', $user));
 });
+
+Breadcrumbs::for('categories.index', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Categories', route('categories.index'));
+});

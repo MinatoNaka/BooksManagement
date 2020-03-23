@@ -3,8 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Category extends Model
 {
-    //
+    use Sortable;
+
+    /**
+     * @var array
+     */
+    public $sortable = [
+        'id', 'name',
+    ];
 }
