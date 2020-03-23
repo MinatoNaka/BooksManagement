@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\CategoryService;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -18,11 +19,12 @@ class CategoryController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $categories = $this->service->getPagedCategories();
+        $categories = $this->service->getPagedCategories($request->all());
 
         return view('categories.index')->with(compact('categories'));
     }

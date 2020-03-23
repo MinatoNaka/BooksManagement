@@ -22,10 +22,6 @@
                                         <div class="col-md-4">
                                             {{ Form::text('name', request('name'), ['id' => 'name', 'class' => 'form-control']) }}
                                         </div>
-                                        {{ Form::label('email', 'メールアドレス', ['class' => 'col-md-2 col-form-label']) }}
-                                        <div class="col-md-4">
-                                            {{ Form::text('email', request('email'), ['id' => 'email', 'class' => 'form-control']) }}
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">

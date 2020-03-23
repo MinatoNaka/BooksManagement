@@ -5,11 +5,22 @@ namespace App\Services;
 
 
 use App\Models\Category;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CategoryService
 {
-    public function getPagedCategories()
+    /**
+     * @param array $searchParams
+     * @return LengthAwarePaginator
+     */
+    public function getPagedCategories(array $searchParams): LengthAwarePaginator
     {
-        return Category::sortable()->paginate(15);
+        $categories = Category::query();
+
+        if (\Arr::has($searchParams, 'name')) {
+            $categories->where('name', 'like', "%{$searchParams['name']}%");
+        }
+
+        return $categories->sortable()->paginate(15);
     }
 }
