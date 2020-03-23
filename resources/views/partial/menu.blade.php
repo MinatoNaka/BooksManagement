@@ -41,8 +41,12 @@
                 <i class="fas fa-book-open c-sidebar-nav-icon"></i>Book
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#">List</a></li>
-                <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="#">Create</a></li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('books.index') }}">List</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+{{--                    <a class="c-sidebar-nav-link" href="{{ route('books.create') }}">Create</a>--}}
+                </li>
             </ul>
         </li>
     </ul>
