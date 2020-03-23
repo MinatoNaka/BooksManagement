@@ -18,7 +18,7 @@ class CategoryService
     {
         $categories = Category::query();
 
-        if (\Arr::has($searchParams, 'name')) {
+        if (isset($searchParams['name'])) {
             $categories->where('name', 'like', "%{$searchParams['name']}%");
         }
 

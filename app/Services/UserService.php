@@ -17,11 +17,11 @@ class UserService
     {
         $users = User::query();
 
-        if (\Arr::has($searchParams, 'name')) {
+        if (isset($searchParams['name'])) {
             $users->where('name', 'like', "%{$searchParams['name']}%");
         }
 
-        if (\Arr::has($searchParams, 'email')) {
+        if (isset($searchParams['email'])) {
             $users->where('email', 'like', "%{$searchParams['email']}%");
         }
 
