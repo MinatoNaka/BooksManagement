@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Services\CategoryService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -35,5 +37,17 @@ class CategoryController extends Controller
     public function create(): View
     {
         return view('categories.create');
+    }
+
+    /**
+     * @param StoreCategoryRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreCategoryRequest $request): RedirectResponse
+    {
+        $this->service->store($request->validated());
+        flash('カテゴリーが登録されました。')->success();
+
+        return redirect()->route('categories.index');
     }
 }

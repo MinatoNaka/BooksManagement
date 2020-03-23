@@ -23,4 +23,13 @@ class CategoryService
 
         return $categories->sortable()->paginate(15);
     }
+
+    /**
+     * @param array $params
+     * @return Category
+     */
+    public function store(array $params): Category
+    {
+        return Category::create($params);
+    }
 }

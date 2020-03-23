@@ -10,6 +10,15 @@ class Category extends Model
     use Sortable;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
      * @var array
      */
     public $sortable = [
