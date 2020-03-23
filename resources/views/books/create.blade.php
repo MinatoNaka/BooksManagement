@@ -54,19 +54,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('author', '著者', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('author_id', '著者', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            {{ Form::select('author', $authors, null, ['id' => 'author', 'class' => ($errors->has('author')) ? 'form-control is-invalid': 'form-control', 'placeholder' => 'please select']) }}
-                                            @error('author')
+                                            {{ Form::select('author_id', $authors, null, ['id' => 'author_id', 'class' => ($errors->has('author_id')) ? 'form-control is-invalid': 'form-control', 'placeholder' => 'please select']) }}
+                                            @error('author_id')
                                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        {{ Form::label('category', 'カテゴリー', ['class' => 'col-md-3 col-form-label']) }}
+                                        {{ Form::label('category_ids', 'カテゴリー', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            {{ Form::select('category', $categories, null, ['id' => 'category', 'class' => ($errors->has('category')) ? 'form-control is-invalid': 'form-control', 'multiple' => true]) }}
-                                            @error('category')
+                                            {{ Form::select('category_ids[]', $categories, null, ['id' => 'category_ids', 'class' => ($errors->has('category_ids')) ? 'form-control is-invalid': 'form-control', 'multiple' => true]) }}
+                                            @error('category_ids')
                                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                             @enderror
                                         </div>

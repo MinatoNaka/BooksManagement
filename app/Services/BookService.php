@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Book;
+use DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -45,5 +46,22 @@ class BookService
         }
 
         return $books->sortable()->paginate(15);
+    }
+
+    /**
+     * @param array $params
+     * @return Book
+     */
+    public function store(array $params): Book
+    {
+        return DB::transaction(function () use ($params) {
+            $book = Book::create($params);
+
+            if (isset($params['category_ids'])) {
+                $book->categories()->attach($params['category_ids']);
+            }
+
+            return $book;
+        });
     }
 }

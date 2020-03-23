@@ -15,6 +15,15 @@ class Book extends Model
     use Sortable, FormAccessible, Userstamps, SoftDeletes;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'description', 'published_at', 'price', 'author_id',
+    ];
+
+    /**
      * @var array
      */
     protected $dates = [

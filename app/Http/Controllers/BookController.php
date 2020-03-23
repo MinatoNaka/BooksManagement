@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\BookService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -43,5 +45,17 @@ class BookController extends Controller
         $categories = Category::pluck('name', 'id');
 
         return view('books.create')->with(compact('authors', 'categories'));
+    }
+
+    /**
+     * @param StoreBookRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StoreBookRequest $request): RedirectResponse
+    {
+        $this->service->store($request->validated());
+        flash('本が登録されました。')->success();
+
+        return redirect()->route('books.index');
     }
 }
