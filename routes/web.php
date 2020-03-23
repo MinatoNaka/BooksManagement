@@ -33,10 +33,32 @@ Route::group(['middleware' => 'auth'], function () {
      * ------------------------------------------------------------------- */
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+    /* ------------------------------------------------------------------- *
+     * Home
+     * ------------------------------------------------------------------- */
     Route::get('home', 'HomeController@index')->name('home');
 
-    Route::resource('users', 'UsersController');
-    Route::resource('categories', 'CategoryController');
+    /* ------------------------------------------------------------------- *
+     * User
+     * ------------------------------------------------------------------- */
+    Route::get('users', 'UsersController@index')->name('users.index');
+    Route::post('users', 'UsersController@store')->name('users.store');
+    Route::get('users/create', 'UsersController@create')->name('users.create');
+    Route::delete('users/{user}', 'UsersController@destroy')->name('users.destroy');
+    Route::put('users/{user}', 'UsersController@update')->name('users.update');
+    Route::get('users/{user}', 'UsersController@show')->name('users.show');
+    Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
+
+    /* ------------------------------------------------------------------- *
+     * Category
+     * ------------------------------------------------------------------- */
+    Route::get('categories', 'CategoryController@index')->name('categories.index');
+    Route::post('categories', 'CategoryController@store')->name('categories.store');
+    Route::get('categories/create', 'CategoryController@create')->name('categories.create');
+    Route::delete('categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
+    Route::put('categories/{category}', 'CategoryController@update')->name('categories.update');
+    Route::get('categories/{category}', 'CategoryController@show')->name('categories.show');
+    Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
 });
 
 
