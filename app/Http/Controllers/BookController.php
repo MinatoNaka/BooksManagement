@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\BookService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -96,5 +97,18 @@ class BookController extends Controller
     public function show(Book $book): View
     {
         return view('books.show')->with(compact('book'));
+    }
+
+    /**
+     * @param Book $book
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function destroy(Book $book): RedirectResponse
+    {
+        $this->service->destroy($book);
+        flash('本が削除されました。')->success();
+
+        return redirect()->route('books.index');
     }
 }

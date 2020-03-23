@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Book;
 use DB;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Throwable;
@@ -86,5 +87,15 @@ class BookService
 
             return $book;
         });
+    }
+
+    /**
+     * @param Book $book
+     * @return bool|null
+     * @throws Exception
+     */
+    public function destroy(Book $book): ?bool
+    {
+        return $book->delete();
     }
 }
