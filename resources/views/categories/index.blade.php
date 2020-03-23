@@ -47,13 +47,19 @@
                                                 <td>{{ $category->id }}</td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('categories.show', $category) }}"
-                                                       class="btn btn-sm btn-outline-info" type="button">詳細</a>
-                                                    <a href="{{ route('categories.edit', $category) }}"
-                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
-                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
-                                                    {{ Form::close() }}
+                                                    @can('view', $category)
+                                                        <a href="{{ route('categories.show', $category) }}"
+                                                           class="btn btn-sm btn-outline-info" type="button">詳細</a>
+                                                    @endcan
+                                                    @can('update', $category)
+                                                        <a href="{{ route('categories.edit', $category) }}"
+                                                           class="btn btn-sm btn-outline-success" type="button">編集</a>
+                                                    @endcan
+                                                    @can('delete', $category)
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                        {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                        {{ Form::close() }}
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
