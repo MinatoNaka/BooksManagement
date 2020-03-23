@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CategoryService
@@ -41,5 +42,15 @@ class CategoryService
     public function update(Category $category, array $params): bool
     {
         return $category->update($params);
+    }
+
+    /**
+     * @param Category $category
+     * @return bool|null
+     * @throws Exception
+     */
+    public function destroy(Category $category): ?bool
+    {
+        return $category->delete();
     }
 }

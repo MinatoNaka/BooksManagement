@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -82,5 +83,18 @@ class CategoryController extends Controller
     public function show(Category $category): View
     {
         return view('categories.show')->with(compact('category'));
+    }
+
+    /**
+     * @param Category $category
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function destroy(Category $category): RedirectResponse
+    {
+        $this->service->destroy($category);
+        flash('カテゴリーが削除されました。')->success();
+
+        return redirect()->route('categories.index');
     }
 }

@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
 use Wildside\Userstamps\Userstamps;
 
 class Category extends Model
 {
-    use Sortable, Userstamps;
+    use Sortable, FormAccessible, Userstamps, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

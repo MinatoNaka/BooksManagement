@@ -51,9 +51,9 @@
                                                        class="btn btn-sm btn-outline-info" type="button">詳細</a>
                                                     <a href="{{ route('categories.edit', $category) }}"
                                                        class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    {{--                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}--}}
-                                                    {{--                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}--}}
-                                                    {{--                                                    {{ Form::close() }}--}}
+                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                    {{ Form::close() }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -71,5 +71,5 @@
 @endsection
 
 @push('scripts')
-    {{--    <script src="{{ mix('js/views/categories/index.js') }}" defer></script>--}}
+    <script src="{{ mix('js/views/categories/index.js') }}" defer></script>
 @endpush
