@@ -26,5 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'birthday' => $faker->dateTimeThisCentury,
         'avatar' => $faker->url,
         'remember_token' => Str::random(10),
+        'created_by' => 1,
+        'updated_by' => 1,
     ];
 });
