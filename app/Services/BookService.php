@@ -8,6 +8,7 @@ use App\Models\Book;
 use DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Throwable;
 
 class BookService
 {
@@ -51,6 +52,7 @@ class BookService
     /**
      * @param array $params
      * @return Book
+     * @throws Throwable
      */
     public function store(array $params): Book
     {
@@ -60,6 +62,27 @@ class BookService
             if (isset($params['category_ids'])) {
                 $book->categories()->attach($params['category_ids']);
             }
+
+            return $book;
+        });
+    }
+
+    /**
+     * @param Book $book
+     * @param array $params
+     * @return Book
+     * @throws Throwable
+     */
+    public function update(Book $book, array $params): Book
+    {
+        return DB::transaction(function () use ($book, $params) {
+            $book->update($params);
+
+            if (!isset($params['category_ids'])) {
+                $params['category_ids'] = [];
+            }
+
+            $book->categories()->sync($params['category_ids']);
 
             return $book;
         });

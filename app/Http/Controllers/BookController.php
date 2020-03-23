@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Services\BookService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Throwable;
 
 class BookController extends Controller
 {
@@ -51,6 +53,7 @@ class BookController extends Controller
     /**
      * @param StoreBookRequest $request
      * @return RedirectResponse
+     * @throws Throwable
      */
     public function store(StoreBookRequest $request): RedirectResponse
     {
@@ -70,5 +73,19 @@ class BookController extends Controller
         $categories = Category::pluck('name', 'id');
 
         return view('books.edit')->with(compact('book', 'authors', 'categories'));
+    }
+
+    /**
+     * @param Book $book
+     * @param UpdateBookRequest $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function update(Book $book, UpdateBookRequest $request): RedirectResponse
+    {
+        $this->service->update($book, $request->validated());
+        flash('本が更新されました。')->success();
+
+        return redirect()->route('books.index');
     }
 }
