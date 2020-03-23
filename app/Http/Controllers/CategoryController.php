@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\RedirectResponse;
@@ -59,5 +60,18 @@ class CategoryController extends Controller
     public function edit(Category $category): View
     {
         return view('categories.edit')->with(compact('category'));
+    }
+
+    /**
+     * @param Category $category
+     * @param UpdateCategoryRequest $request
+     * @return RedirectResponse
+     */
+    public function update(Category $category, UpdateCategoryRequest $request): RedirectResponse
+    {
+        $this->service->update($category, $request->validated());
+        flash('カテゴリーが更新されました。')->success();
+
+        return redirect()->route('categories.index');
     }
 }

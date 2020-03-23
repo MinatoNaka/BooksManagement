@@ -32,4 +32,14 @@ class CategoryService
     {
         return Category::create($params);
     }
+
+    /**
+     * @param Category $category
+     * @param array $params
+     * @return bool
+     */
+    public function update(Category $category, array $params): bool
+    {
+        return $category->update($params);
+    }
 }
