@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Collective\Html\Eloquent\FormAccessible;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -84,5 +85,13 @@ class User extends Authenticatable
     public function formBirthdayAttribute($value): string
     {
         return $value->format('Y-m-d');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function books(): HasMany
+    {
+        return $this->hasMany(Book::class, 'author_id');
     }
 }

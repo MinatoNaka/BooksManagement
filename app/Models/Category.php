@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kyslik\ColumnSortable\Sortable;
 use Wildside\Userstamps\Userstamps;
@@ -42,5 +43,13 @@ class Category extends Model
     public function getFormattedUpdatedAtAttribute(): string
     {
         return $this->updated_at->format('Y/m/d H:i:s');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function books(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class);
     }
 }
