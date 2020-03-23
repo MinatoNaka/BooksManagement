@@ -65,7 +65,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $categories->links() }}
+                                    {{ $categories->appends(request()->except('page'))->links() }}
                                 </div>
                             </div>
                         </div>

@@ -95,7 +95,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $books->links() }}
+                                    {{ $books->appends(request()->except('page'))->links() }}
                                 </div>
                             </div>
                         </div>
