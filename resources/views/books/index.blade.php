@@ -83,13 +83,19 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('books.show', $book) }}"
-                                                       class="btn btn-sm btn-outline-info" type="button">詳細</a>
-                                                    <a href="{{ route('books.edit', $book) }}"
-                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['books.destroy', $book], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
-                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
-                                                    {{ Form::close() }}
+                                                    @can('view', $book)
+                                                        <a href="{{ route('books.show', $book) }}"
+                                                           class="btn btn-sm btn-outline-info" type="button">詳細</a>
+                                                    @endcan
+                                                    @can('update', $book)
+                                                        <a href="{{ route('books.edit', $book) }}"
+                                                           class="btn btn-sm btn-outline-success" type="button">編集</a>
+                                                    @endcan
+                                                    @can('delete', $book)
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['books.destroy', $book], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                        {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                        {{ Form::close() }}
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
