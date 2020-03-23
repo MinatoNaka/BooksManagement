@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\User;
 use App\Services\BookService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,6 +28,9 @@ class BookController extends Controller
     {
         $books = $this->service->getPagedBooks($request->all());
 
-        return view('books.index')->with(compact('books'));
+        $authors = User::pluck('name', 'id');
+        $categories = Category::pluck('name', 'id');
+
+        return view('books.index')->with(compact('books', 'authors', 'categories'));
     }
 }

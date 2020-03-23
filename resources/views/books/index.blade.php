@@ -17,16 +17,36 @@
                                 <div class="card-header">検索</div>
                                 {{ Form::open(['method' => 'GET', 'route' => 'books.index', 'files' => true, 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
-                                    {{--                                    <div class="form-group row">--}}
-                                    {{--                                        {{ Form::label('name', '本名', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::text('name', request('name'), ['id' => 'name', 'class' => 'form-control']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        {{ Form::label('email', 'メールアドレス', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::text('email', request('email'), ['id' => 'email', 'class' => 'form-control']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    <div class="form-group row">
+                                        {{ Form::label('title', 'タイトル', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::text('title', request('title'), ['id' => 'title', 'class' => 'form-control']) }}
+                                        </div>
+                                        {{ Form::label('price', '価格', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::text('price', request('price'), ['id' => 'price', 'class' => 'form-control']) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('published_at_from', '出版日FROM', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::date('published_at_from', request('published_at_from'), ['id' => 'published_at_from', 'class' => 'form-control']) }}
+                                        </div>
+                                        {{ Form::label('published_at_to', '出版日TO', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::date('published_at_to', request('published_at_to'), ['id' => 'published_at_to', 'class' => 'form-control']) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('author', '著者', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('author', $authors, request('author'), ['id' => 'author', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                        {{ Form::label('category', 'カテゴリー', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('category', $categories, request('category'), ['id' => 'category', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     {{ Form::submit('検索', ['class' => 'btn btn-sm btn-primary']) }}
@@ -54,7 +74,7 @@
                                             <tr>
                                                 <td>{{ $book->id }}</td>
                                                 <td>{{ $book->title }}</td>
-                                                <td>{{ $book->published_at }}</td>
+                                                <td>{{ $book->formatted_published_at }}</td>
                                                 <td>{{ $book->price }}</td>
                                                 <td>{{ $book->author->name }}</td>
                                                 <td>

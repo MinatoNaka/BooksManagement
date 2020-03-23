@@ -17,9 +17,24 @@ class Book extends Model
     /**
      * @var array
      */
+    protected $dates = [
+        'published_at',
+    ];
+
+    /**
+     * @var array
+     */
     public $sortable = [
         'id', 'title', 'published_at', 'price',
     ];
+
+    /**
+     * @return string
+     */
+    public function getFormattedPublishedAtAttribute(): string
+    {
+        return $this->published_at->format('Y/m/d');
+    }
 
     /**
      * @return BelongsToMany
