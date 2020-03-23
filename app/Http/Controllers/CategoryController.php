@@ -28,4 +28,12 @@ class CategoryController extends Controller
 
         return view('categories.index')->with(compact('categories'));
     }
+
+    /**
+     * @return View
+     */
+    public function create(): View
+    {
+        return view('categories.create');
+    }
 }

@@ -25,6 +25,19 @@
         </li>
         <li class="c-sidebar-nav-dropdown">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="fas fa-tag c-sidebar-nav-icon"></i>Category
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('categories.index') }}">List</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route('categories.create') }}">Create</a>
+                </li>
+            </ul>
+        </li>
+        <li class="c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fas fa-book-open c-sidebar-nav-icon"></i>Book
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
