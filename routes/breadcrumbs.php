@@ -33,3 +33,8 @@ Breadcrumbs::for('categories.create', function ($trail) {
     $trail->parent('categories.index');
     $trail->push('Create', route('categories.create'));
 });
+
+Breadcrumbs::for('categories.edit', function ($trail, $category) {
+    $trail->parent('categories.index');
+    $trail->push('Edit', route('categories.edit', $category));
+});

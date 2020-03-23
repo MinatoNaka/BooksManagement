@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -49,5 +50,14 @@ class CategoryController extends Controller
         flash('カテゴリーが登録されました。')->success();
 
         return redirect()->route('categories.index');
+    }
+
+    /**
+     * @param Category $category
+     * @return View
+     */
+    public function edit(Category $category): View
+    {
+        return view('categories.edit')->with(compact('category'));
     }
 }
