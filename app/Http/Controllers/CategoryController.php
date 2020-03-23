@@ -74,4 +74,13 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
     }
+
+    /**
+     * @param Category $category
+     * @return View
+     */
+    public function show(Category $category): View
+    {
+        return view('categories.show')->with(compact('category'));
+    }
 }
