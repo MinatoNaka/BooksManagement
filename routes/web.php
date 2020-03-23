@@ -55,10 +55,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('categories', 'CategoryController@index')->name('categories.index');
     Route::post('categories', 'CategoryController@store')->name('categories.store');
     Route::get('categories/create', 'CategoryController@create')->name('categories.create');
-    Route::delete('categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
-    Route::put('categories/{category}', 'CategoryController@update')->name('categories.update');
-    Route::get('categories/{category}', 'CategoryController@show')->name('categories.show');
-    Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit');
+    Route::delete('categories/{category}', 'CategoryController@destroy')->name('categories.destroy')->middleware('can:delete,category');
+    Route::put('categories/{category}', 'CategoryController@update')->name('categories.update')->middleware('can:update,category');
+    Route::get('categories/{category}', 'CategoryController@show')->name('categories.show')->middleware('can:view,category');
+    Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit')->middleware('can:update,category');
 });
 
 
