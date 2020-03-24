@@ -17,36 +17,22 @@
                                 <div class="card-header">検索</div>
                                 {{ Form::open(['method' => 'GET', 'route' => ['books.reviews.index', $book], 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
-                                    {{--                                    <div class="form-group row">--}}
-                                    {{--                                        {{ Form::label('title', 'タイトル', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::text('title', request('title'), ['id' => 'title', 'class' => 'form-control']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        {{ Form::label('price', '価格', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::text('price', request('price'), ['id' => 'price', 'class' => 'form-control']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                    <div class="form-group row">--}}
-                                    {{--                                        {{ Form::label('published_at_from', '出版日FROM', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::date('published_at_from', request('published_at_from'), ['id' => 'published_at_from', 'class' => 'form-control']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        {{ Form::label('published_at_to', '出版日TO', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::date('published_at_to', request('published_at_to'), ['id' => 'published_at_to', 'class' => 'form-control']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                    <div class="form-group row">--}}
-                                    {{--                                        {{ Form::label('author', '著者', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::select('author', $authors, request('author'), ['id' => 'author', 'class' => 'form-control', 'placeholder' => 'please select']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        {{ Form::label('category', 'カテゴリー', ['class' => 'col-md-2 col-form-label']) }}--}}
-                                    {{--                                        <div class="col-md-4">--}}
-                                    {{--                                            {{ Form::select('category', $categories, request('category'), ['id' => 'category', 'class' => 'form-control', 'placeholder' => 'please select']) }}--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                    <div class="form-group row">
+                                        {{ Form::label('reviewer', 'レビュワー', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('reviewer', $reviewers, request('reviewer'), ['id' => 'reviewer', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                        {{ Form::label('comment', 'コメント', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::text('comment', request('comment'), ['id' => 'comment', 'class' => 'form-control']) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('star', 'スター', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('star', [1 => '1以上', 2 => '2以上', 3 => '3以上', 4 => '4以上', 5 => '5'], request('star'), ['id' => 'star', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     {{ Form::submit('検索', ['class' => 'btn btn-sm btn-primary']) }}

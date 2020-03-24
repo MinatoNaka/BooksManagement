@@ -70,6 +70,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('books/{book}', 'BookController@update')->name('books.update')->middleware('can:update,book');
     Route::get('books/{book}', 'BookController@show')->name('books.show')->middleware('can:view,book');
     Route::get('books/{book}/edit', 'BookController@edit')->name('books.edit')->middleware('can:update,book');
+
+    /* ------------------------------------------------------------------- *
+     * Review
+     * ------------------------------------------------------------------- */
+    Route::get('books/{book}/reviews', 'ReviewController@index')->name('books.reviews.index');
 });
 
 

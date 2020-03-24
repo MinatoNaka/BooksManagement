@@ -16,33 +16,19 @@ class ReviewService
      */
     public function getPagedReviews(Book $book, array $searchParams): LengthAwarePaginator
     {
-        $reviews = $book->reviews();
+        $reviews = $book->reviews()->with('reviewer');
 
-//        if (isset($searchParams['title'])) {
-//            $books->where('title', 'like', "%{$searchParams['title']}%");
-//        }
-//
-//        if (isset($searchParams['price'])) {
-//            $books->where('price', 'like', "%{$searchParams['price']}%");
-//        }
-//
-//        if (isset($searchParams['published_at_from'])) {
-//            $books->where('published_at', '>=', $searchParams['published_at_from']);
-//        }
-//
-//        if (isset($searchParams['published_at_to'])) {
-//            $books->where('published_at', '<=', $searchParams['published_at_to']);
-//        }
-//
-//        if (isset($searchParams['author'])) {
-//            $books->where('author_id', $searchParams['author']);
-//        }
-//
-//        if (isset($searchParams['category'])) {
-//            $books->whereHas('categories', function (Builder $query) use ($searchParams) {
-//                $query->where('id', $searchParams['category']);
-//            });
-//        }
+        if (isset($searchParams['reviewer'])) {
+            $reviews->where('reviewer_id', $searchParams['reviewer']);
+        }
+
+        if (isset($searchParams['comment'])) {
+            $reviews->where('comment', 'like', "%{$searchParams['comment']}%");
+        }
+
+        if (isset($searchParams['star'])) {
+            $reviews->where('star', '>=', $searchParams['star']);
+        }
 
         return $reviews->sortable()->paginate(15);
     }
