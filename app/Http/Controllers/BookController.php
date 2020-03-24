@@ -106,8 +106,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book): RedirectResponse
     {
-        $this->service->destroy($book);
-        flash('本が削除されました。')->success();
+        if ($this->service->destroy($book)) {
+            flash('本が削除されました。')->success();
+        }
 
         return redirect()->route('books.index');
     }

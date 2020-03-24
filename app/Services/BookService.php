@@ -96,6 +96,12 @@ class BookService
      */
     public function destroy(Book $book): ?bool
     {
+        if ($book->reviews()->exists()) {
+            flash('レビューが存在するため本が削除できませんでした。')->error();
+
+            return false;
+        }
+
         return $book->delete();
     }
 }
