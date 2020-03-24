@@ -33,4 +33,13 @@ class ReviewController extends Controller
 
         return view('reviews.index')->with(compact('book', 'reviews', 'reviewers'));
     }
+
+    /**
+     * @param Book $book
+     * @return View
+     */
+    public function create(Book $book): View
+    {
+        return view('reviews.create')->with(compact('book'));
+    }
 }

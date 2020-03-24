@@ -112,6 +112,9 @@
                                     </table>
                                     {{ $reviews->appends(request()->except('page'))->links() }}
                                 </div>
+                                <div class="card-footer">
+                                    <a href="{{ route('books.reviews.create', $book) }}" class="btn btn-sm btn-primary">レビュー登録</a>
+                                </div>
                             </div>
                         </div>
                     </div>
