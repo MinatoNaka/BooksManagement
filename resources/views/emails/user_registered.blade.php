@@ -2,4 +2,4 @@
 
 ユーザ名：{{ $user->name }}
 メールアドレス：{{ $user->email }}
-生年月日：{{ $user->birthday }}
+生年月日：{{ $user->formatted_birthday }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegistered;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
@@ -48,7 +49,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request): RedirectResponse
     {
-        $this->service->store($request->validated());
+        $user = $this->service->store($request->validated());
+        event(new UserRegistered($user));
+
         flash('ユーザが登録されました。')->success();
 
         return redirect()->route('users.index');
