@@ -63,3 +63,8 @@ Breadcrumbs::for('books.show', function ($trail, $book) {
     $trail->parent('books.index');
     $trail->push('Show', route('books.show', $book));
 });
+
+Breadcrumbs::for('books.reviews.index', function ($trail, $book) {
+    $trail->parent('books.show', $book);
+    $trail->push('Reviews', route('books.reviews.index', $book));
+});

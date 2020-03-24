@@ -14,6 +14,13 @@ class Review extends Model
     use Sortable, FormAccessible, Userstamps, SoftDeletes;
 
     /**
+     * @var array
+     */
+    public $sortable = [
+        'id', 'comment', 'star',
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function book(): BelongsTo
