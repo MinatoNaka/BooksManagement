@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReviewRequest;
 use App\Models\Book;
+use App\Models\Review;
 use App\Models\User;
 use App\Services\ReviewService;
 use Illuminate\Http\RedirectResponse;
@@ -56,5 +57,14 @@ class ReviewController extends Controller
         flash('レビューが登録されました。')->success();
 
         return redirect()->route('books.reviews.index', $book);
+    }
+
+    /**
+     * @param Review $review
+     * @return View
+     */
+    public function edit(Review $review): View
+    {
+        return view('reviews.edit')->with(compact('review'));
     }
 }

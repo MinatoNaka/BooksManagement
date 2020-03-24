@@ -77,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('books/{book}/reviews', 'ReviewController@index')->name('books.reviews.index');
     Route::post('books/{book}/reviews', 'ReviewController@store')->name('books.reviews.store');
     Route::get('books/{book}/reviews/create', 'ReviewController@create')->name('books.reviews.create');
+    Route::put('reviews/{review}', 'ReviewController@update')->name('reviews.update');
+    Route::get('reviews/{review}/edit', 'ReviewController@edit')->name('reviews.edit');
 });
 
 

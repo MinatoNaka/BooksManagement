@@ -97,8 +97,8 @@
                                                     {{--                                                           class="btn btn-sm btn-outline-info" type="button">詳細</a>--}}
                                                     {{--                                                    @endcan--}}
                                                     {{--                                                    @can('update', $review)--}}
-                                                    {{--                                                        <a href="{{ route('reviews.edit', $review) }}"--}}
-                                                    {{--                                                           class="btn btn-sm btn-outline-success" type="button">編集</a>--}}
+                                                    <a href="{{ route('reviews.edit', $review) }}"
+                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
                                                     {{--                                                    @endcan--}}
                                                     {{--                                                    @can('delete', $review)--}}
                                                     {{--                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['reviews.destroy', $review], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}--}}

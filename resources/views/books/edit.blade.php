@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'カテゴリー編集')
+@section('title', '本編集')
 
 @section('breadcrumbs')
     {{ Breadcrumbs::render('books.edit', $book) }}
@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header">カテゴリー編集</div>
+                                <div class="card-header">本編集</div>
                                 {{ Form::model($book, ['method' => 'PUT', 'route' => ['books.update', $book], 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
