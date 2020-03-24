@@ -14,6 +14,33 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
+                                <div class="card-header">本詳細</div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        {{ Form::label('id', 'ID', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{ $book->id }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('title', 'タイトル', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{ $book->title }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('category', 'カテゴリー', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">
+                                                @foreach($book->categories as $category)
+                                                    {{ $category->name }}<br>
+                                                @endforeach
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
                                 <div class="card-header">検索</div>
                                 {{ Form::open(['method' => 'GET', 'route' => ['books.reviews.index', $book], 'class' => 'form-horizontal']) }}
                                 <div class="card-body">
