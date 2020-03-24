@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Review;
 use App\Models\User;
 use App\Services\ReviewService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -78,6 +79,19 @@ class ReviewController extends Controller
     {
         $this->service->update($review, $request->validated());
         flash('レビューが更新されました。')->success();
+
+        return redirect()->route('books.reviews.index', $review->book);
+    }
+
+    /**
+     * @param Review $review
+     * @return RedirectResponse
+     * @throws Exception
+     */
+    public function destroy(Review $review): RedirectResponse
+    {
+        $this->service->destroy($review);
+        flash('レビューが削除されました。')->success();
 
         return redirect()->route('books.reviews.index', $review->book);
     }

@@ -101,9 +101,9 @@
                                                        class="btn btn-sm btn-outline-success" type="button">編集</a>
                                                     {{--                                                    @endcan--}}
                                                     {{--                                                    @can('delete', $review)--}}
-                                                    {{--                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['reviews.destroy', $review], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}--}}
-                                                    {{--                                                        {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}--}}
-                                                    {{--                                                        {{ Form::close() }}--}}
+                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['reviews.destroy', $review], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                    {{ Form::close() }}
                                                     {{--                                                    @endcan--}}
                                                 </td>
                                             </tr>
@@ -125,5 +125,5 @@
 @endsection
 
 @push('scripts')
-    {{--    <script src="{{ mix('js/views/reviews/index.js') }}" defer></script>--}}
+    <script src="{{ mix('js/views/reviews/index.js') }}" defer></script>
 @endpush

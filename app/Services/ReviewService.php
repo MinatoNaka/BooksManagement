@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Book;
 use App\Models\Review;
 use Auth;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ReviewService
@@ -55,5 +56,15 @@ class ReviewService
     public function update(Review $review, array $params): bool
     {
         return $review->update($params);
+    }
+
+    /**
+     * @param Review $review
+     * @return bool|null
+     * @throws Exception
+     */
+    public function destroy(Review $review): ?bool
+    {
+        return $review->delete();
     }
 }
