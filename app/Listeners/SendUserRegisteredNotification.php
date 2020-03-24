@@ -2,29 +2,16 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Events\UserRegistered;
+use Mail;
 
 class SendUserRegisteredNotification
 {
     /**
-     * Create the event listener.
-     *
-     * @return void
+     * @param UserRegistered $event
      */
-    public function __construct()
+    public function handle(UserRegistered $event): void
     {
-        //
-    }
-
-    /**
-     * Handle the event.
-     *
-     * @param  object  $event
-     * @return void
-     */
-    public function handle($event)
-    {
-        //
+        Mail::to($event->user)->send(new \App\Mail\UserRegistered($event->user));
     }
 }
