@@ -5,7 +5,7 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserRegisteredNotification
+class SendUserRegisteredNotification
 {
     /**
      * Create the event listener.
