@@ -16,6 +16,13 @@ class Review extends Model
     /**
      * @var array
      */
+    protected $fillable = [
+        'comment', 'star', 'reviewer_id',
+    ];
+
+    /**
+     * @var array
+     */
     public $sortable = [
         'id', 'comment', 'star',
     ];

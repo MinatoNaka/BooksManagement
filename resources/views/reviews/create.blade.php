@@ -29,7 +29,7 @@
                                     <div class="form-group row">
                                         {{ Form::label('star', 'スター', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
-                                            <div class="form-check">
+                                            <div class="form-check @error('star') is-invalid @enderror">
                                                 {{ Form::radio('star', 1, false, ['id' => 'star1', 'class' => 'form-check-input']) }}
                                                 {{ Form::label('star1', '<i class="fas fa-star"></i>', ['class' => 'form-check-label'], false) }}
                                             </div>

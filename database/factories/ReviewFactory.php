@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Review::class, function (Faker $faker) {
     return [
         'comment' => $faker->sentence,
-        'star' => $faker->numberBetween(0, 5),
+        'star' => $faker->numberBetween(1, 5),
         'created_by' => 1,
         'updated_by' => 1,
     ];

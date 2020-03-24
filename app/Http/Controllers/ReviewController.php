@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreReviewRequest;
 use App\Models\Book;
 use App\Models\User;
 use App\Services\ReviewService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -41,5 +43,18 @@ class ReviewController extends Controller
     public function create(Book $book): View
     {
         return view('reviews.create')->with(compact('book'));
+    }
+
+    /**
+     * @param StoreReviewRequest $request
+     * @param Book $book
+     * @return RedirectResponse
+     */
+    public function store(StoreReviewRequest $request, Book $book): RedirectResponse
+    {
+        $this->service->store($book, $request->validated());
+        flash('レビューが登録されました。')->success();
+
+        return redirect()->route('books.reviews.index', $book);
     }
 }

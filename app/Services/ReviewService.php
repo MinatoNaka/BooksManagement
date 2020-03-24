@@ -5,6 +5,8 @@ namespace App\Services;
 
 
 use App\Models\Book;
+use App\Models\Review;
+use Auth;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ReviewService
@@ -31,5 +33,17 @@ class ReviewService
         }
 
         return $reviews->sortable()->paginate(15);
+    }
+
+    /**
+     * @param Book $book
+     * @param array $params
+     * @return Review
+     */
+    public function store(Book $book, array $params): Review
+    {
+        $params['reviewer_id'] = Auth::user()->id;
+
+        return $book->reviews()->create($params);
     }
 }
