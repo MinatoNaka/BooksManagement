@@ -97,4 +97,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Book::class, 'author_id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'reviewer_id');
+    }
 }
