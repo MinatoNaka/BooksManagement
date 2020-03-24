@@ -2,8 +2,8 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -12,22 +12,25 @@ class UserRegistered extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * @var User
      */
-    public function __construct()
+    private $user;
+
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * @return UserRegistered
      */
-    public function build()
+    public function build(): UserRegistered
     {
-        return $this->view('view.name');
+        return $this
+            ->subject('ユーザ登録完了のお知らせ')
+            ->text('emails/user_registered')
+            ->with([
+                'user' => $this->user,
+            ]);
     }
 }
