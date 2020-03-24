@@ -43,7 +43,7 @@ class StoreUserRequest extends FormRequest
             'email' => 'メールアドレス',
             'password' => 'パスワード',
             'birthday' => '生年月日',
-            'avatar' => 'アバター'
+            'avatar' => 'アバター',
         ];
     }
 }

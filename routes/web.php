@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('users/{user}', 'UserController@update')->name('users.update');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::delete('users/{user}/avatar', 'UserController@destroyAvatar')->name('users.avatar.destroy');
 
     /* ------------------------------------------------------------------- *
      * Category

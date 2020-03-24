@@ -35,8 +35,10 @@ class UserService
      */
     public function store(array $params): User
     {
-        $avatarPath = Storage::disk('s3')->putFile('avatar', $params['avatar'], 'public');
-        $params['avatar'] = $avatarPath;
+        if (isset($params['avatar'])) {
+            $avatarPath = Storage::disk('s3')->putFile('avatar', $params['avatar'], 'public');
+            $params['avatar'] = $avatarPath;
+        }
 
         return User::create($params);
     }
@@ -48,6 +50,11 @@ class UserService
      */
     public function update(User $user, array $params): bool
     {
+        if (isset($params['avatar'])) {
+            $avatarPath = Storage::disk('s3')->putFile('avatar', $params['avatar'], 'public');
+            $params['avatar'] = $avatarPath;
+        }
+
         return $user->update($params);
     }
 
@@ -59,5 +66,18 @@ class UserService
     public function destroy(User $user): ?bool
     {
         return $user->delete();
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function destroyAvatar(User $user): bool
+    {
+        Storage::disk('s3')->delete($user->avatar);
+
+        return $user->update([
+            'avatar' => null,
+        ]);
     }
 }

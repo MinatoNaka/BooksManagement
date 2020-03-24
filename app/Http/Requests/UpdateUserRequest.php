@@ -33,6 +33,7 @@ class UpdateUserRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore($this->route('user'))
             ],
             'birthday' => ['required', 'date'],
+            'avatar' => ['image'],
         ];
     }
 
@@ -45,6 +46,7 @@ class UpdateUserRequest extends FormRequest
             'name' => '名前',
             'email' => 'メールアドレス',
             'birthday' => '生年月日',
+            'avatar' => 'アバター',
         ];
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -87,7 +88,7 @@ class UserController extends Controller
     /**
      * @param User $user
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(User $user): RedirectResponse
     {
@@ -95,5 +96,17 @@ class UserController extends Controller
         flash('ユーザが削除されました。')->success();
 
         return redirect()->route('users.index');
+    }
+
+    /**
+     * @param User $user
+     * @return RedirectResponse
+     */
+    public function destroyAvatar(User $user): RedirectResponse
+    {
+        $this->service->destroyAvatar($user);
+        flash('アバターが削除されました。')->success();
+
+        return redirect()->route('users.edit', $user);
     }
 }

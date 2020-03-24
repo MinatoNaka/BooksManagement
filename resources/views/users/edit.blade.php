@@ -51,6 +51,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        {{ Form::label('avatar', 'アバター', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            @isset($user->avatar)
+                                                <img src="{{ config('filesystems.awsPublicEndpoint') . $user->avatar }}"
+                                                     alt="avatar"
+                                                     height="100px">
+                                                {{ Form::submit('アバター削除', ['class' => 'btn btn-sm btn-outline-danger', 'form' => 'destroy-avatar-form']) }}
+                                            @endisset
+                                            @empty($user->avatar)
+                                                {{ Form::file('avatar', ['id' => 'avatar', 'class' => ($errors->has('avatar')) ? 'form-control is-invalid': 'form-control']) }}
+                                                @error('avatar')
+                                                <span class="invalid-feedback"
+                                                      role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
+                                            @endempty
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         {{ Form::label('created-at', '作成日時', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             <p class="form-control-static">{{ $user->formatted_created_at }}</p>
@@ -87,4 +105,10 @@
             </div>
         </div>
     </div>
+    {{ Form::open(['method' => 'DELETE', 'route' => ['users.avatar.destroy', $user], 'v-on:submit="confirm"', 'id' => 'destroy-avatar-form']) }}
+    {{ Form::close() }}
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/views/users/edit.js') }}" defer></script>
+@endpush
