@@ -77,9 +77,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('books/{book}/reviews', 'ReviewController@index')->name('books.reviews.index');
     Route::post('books/{book}/reviews', 'ReviewController@store')->name('books.reviews.store');
     Route::get('books/{book}/reviews/create', 'ReviewController@create')->name('books.reviews.create');
-    Route::delete('reviews/{review}', 'ReviewController@destroy')->name('reviews.destroy');
-    Route::put('reviews/{review}', 'ReviewController@update')->name('reviews.update');
-    Route::get('reviews/{review}/edit', 'ReviewController@edit')->name('reviews.edit');
+    Route::delete('reviews/{review}', 'ReviewController@destroy')->name('reviews.destroy')->middleware('can:delete,review');
+    Route::put('reviews/{review}', 'ReviewController@update')->name('reviews.update')->middleware('can:update,review');
+    Route::get('reviews/{review}/edit', 'ReviewController@edit')->name('reviews.edit')->middleware('can:update,review');
 });
 
 

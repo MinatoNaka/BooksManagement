@@ -92,19 +92,15 @@
                                                     @endfor
                                                 </td>
                                                 <td>
-                                                    {{--                                                    @can('view', $review)--}}
-                                                    {{--                                                        <a href="{{ route('reviews.show', $review) }}"--}}
-                                                    {{--                                                           class="btn btn-sm btn-outline-info" type="button">詳細</a>--}}
-                                                    {{--                                                    @endcan--}}
-                                                    {{--                                                    @can('update', $review)--}}
-                                                    <a href="{{ route('reviews.edit', $review) }}"
-                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    {{--                                                    @endcan--}}
-                                                    {{--                                                    @can('delete', $review)--}}
-                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['reviews.destroy', $review], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
-                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
-                                                    {{ Form::close() }}
-                                                    {{--                                                    @endcan--}}
+                                                    @can('update', $review)
+                                                        <a href="{{ route('reviews.edit', $review) }}"
+                                                           class="btn btn-sm btn-outline-success" type="button">編集</a>
+                                                    @endcan
+                                                    @can('delete', $review)
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['reviews.destroy', $review], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                        {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                        {{ Form::close() }}
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
