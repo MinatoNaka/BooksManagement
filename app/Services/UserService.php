@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Storage;
 
 class UserService
 {
@@ -34,6 +35,9 @@ class UserService
      */
     public function store(array $params): User
     {
+        $avatarPath = Storage::disk('s3')->putFile('avatar', $params['avatar'], 'public');
+        $params['avatar'] = $avatarPath;
+
         return User::create($params);
     }
 

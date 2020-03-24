@@ -41,6 +41,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        {{ Form::label('avatar', 'アバター', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            @isset($user->avatar)
+                                                <img src="{{ config('filesystems.awsPublicEndpoint') . $user->avatar }}"
+                                                     alt="avatar"
+                                                     height="100px">
+                                            @endisset
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         {{ Form::label('created-at', '作成日時', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             <p class="form-control-static">{{ $user->formatted_created_at }}</p>

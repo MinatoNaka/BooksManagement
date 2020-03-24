@@ -59,6 +59,15 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('avatar', 'アバター', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            {{ Form::file('avatar', ['id' => 'avatar', 'class' => ($errors->has('avatar')) ? 'form-control is-invalid': 'form-control']) }}
+                                            @error('avatar')
+                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     {{ Form::submit('登録', ['class' => 'btn btn-sm btn-primary']) }}

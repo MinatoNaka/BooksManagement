@@ -29,6 +29,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', new Password()],
             'birthday' => ['required', 'date'],
+            'avatar' => ['image'],
         ];
     }
 
@@ -42,6 +43,7 @@ class StoreUserRequest extends FormRequest
             'email' => 'メールアドレス',
             'password' => 'パスワード',
             'birthday' => '生年月日',
+            'avatar' => 'アバター'
         ];
     }
 }
