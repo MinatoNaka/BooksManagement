@@ -63,6 +63,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        {{ Form::label('author', 'レビュー数', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            <p class="form-control-static">{{ $book->reviews()->count() }}</p>
+                                            <a href="{{ route('books.reviews.index', $book) }}" class="btn btn-sm btn-primary">レビュー一覧</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         {{ Form::label('created-at', '作成日時', ['class' => 'col-md-3 col-form-label']) }}
                                         <div class="col-md-9">
                                             <p class="form-control-static">{{ $book->formatted_created_at }}</p>

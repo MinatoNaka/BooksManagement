@@ -66,6 +66,7 @@
                                             <th>@sortablelink('price', '価格')</th>
                                             <th>@sortablelink('author.name', '著者')</th>
                                             <th>カテゴリ</th>
+                                            <th>@sortablelink('reviews_count', 'レビュー数')</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -82,6 +83,7 @@
                                                         {{ $category->name }}<br>
                                                     @endforeach
                                                 </td>
+                                                <td>{{ $book->reviews_count }}</td>
                                                 <td>
                                                     @can('view', $book)
                                                         <a href="{{ route('books.show', $book) }}"

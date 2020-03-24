@@ -19,7 +19,7 @@ class BookService
      */
     public function getPagedBooks(array $searchParams): LengthAwarePaginator
     {
-        $books = Book::with(['author', 'categories']);
+        $books = Book::with(['author', 'categories'])->withCount('reviews');
 
         if (isset($searchParams['title'])) {
             $books->where('title', 'like', "%{$searchParams['title']}%");

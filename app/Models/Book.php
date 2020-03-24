@@ -39,6 +39,13 @@ class Book extends Model
     ];
 
     /**
+     * @var array
+     */
+    public $sortableAs = [
+        'reviews_count'
+    ];
+
+    /**
      * @return string
      */
     public function getFormattedPublishedAtAttribute(): string
