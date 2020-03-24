@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReviewRequest;
+use App\Http\Requests\UpdateReviewRequest;
 use App\Models\Book;
 use App\Models\Review;
 use App\Models\User;
@@ -66,5 +67,18 @@ class ReviewController extends Controller
     public function edit(Review $review): View
     {
         return view('reviews.edit')->with(compact('review'));
+    }
+
+    /**
+     * @param UpdateReviewRequest $request
+     * @param Review $review
+     * @return RedirectResponse
+     */
+    public function update(UpdateReviewRequest $request, Review $review): RedirectResponse
+    {
+        $this->service->update($review, $request->validated());
+        flash('レビューが更新されました。')->success();
+
+        return redirect()->route('books.reviews.index', $review->book);
     }
 }

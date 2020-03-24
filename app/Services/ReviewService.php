@@ -46,4 +46,14 @@ class ReviewService
 
         return $book->reviews()->create($params);
     }
+
+    /**
+     * @param Review $review
+     * @param array $params
+     * @return bool
+     */
+    public function update(Review $review, array $params): bool
+    {
+        return $review->update($params);
+    }
 }
