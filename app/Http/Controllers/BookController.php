@@ -11,7 +11,9 @@ use App\Services\BookService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
+use League\Csv\CannotInsertRecord;
 use Throwable;
 
 class BookController extends Controller
@@ -111,5 +113,15 @@ class BookController extends Controller
         }
 
         return redirect()->route('books.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws CannotInsertRecord
+     */
+    public function export(Request $request): Response
+    {
+        return $this->service->export($request->all());
     }
 }

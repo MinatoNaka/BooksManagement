@@ -9,6 +9,10 @@ use DB;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Response;
+use League\Csv\CannotInsertRecord;
+use League\Csv\Writer;
+use SplTempFileObject;
 use Throwable;
 
 class BookService
@@ -19,33 +23,7 @@ class BookService
      */
     public function getPagedBooks(array $searchParams): LengthAwarePaginator
     {
-        $books = Book::with(['author', 'categories'])->withCount('reviews');
-
-        if (isset($searchParams['title'])) {
-            $books->where('title', 'like', "%{$searchParams['title']}%");
-        }
-
-        if (isset($searchParams['price'])) {
-            $books->where('price', 'like', "%{$searchParams['price']}%");
-        }
-
-        if (isset($searchParams['published_at_from'])) {
-            $books->where('published_at', '>=', $searchParams['published_at_from']);
-        }
-
-        if (isset($searchParams['published_at_to'])) {
-            $books->where('published_at', '<=', $searchParams['published_at_to']);
-        }
-
-        if (isset($searchParams['author'])) {
-            $books->where('author_id', $searchParams['author']);
-        }
-
-        if (isset($searchParams['category'])) {
-            $books->whereHas('categories', function (Builder $query) use ($searchParams) {
-                $query->where('id', $searchParams['category']);
-            });
-        }
+        $books = $this->getSearchedBooks($searchParams);
 
         return $books->sortable()->paginate(15);
     }
@@ -103,5 +81,78 @@ class BookService
         }
 
         return $book->delete();
+    }
+
+    /**
+     * @param array $searchParams
+     * @return Response
+     * @throws CannotInsertRecord
+     */
+    public function export(array $searchParams): Response
+    {
+        $fileName = 'books_' . now()->format('YmdHis') . '.csv';
+        $header = ['ID', 'タイトル', '概要', '著者', '出版日', '価格', 'カテゴリー', 'レビュー数'];
+        $books = $this->getSearchedBooks($searchParams)->get();
+
+        $csv = Writer::createFromFileObject(new SplTempFileObject());
+        $csv->insertOne($header);
+
+        foreach ($books as $book) {
+            $csv->insertOne([
+                $book->id,
+                $book->title,
+                $book->description,
+                $book->author->name,
+                $book->formatted_published_at,
+                $book->price,
+                $book->categories->pluck('name')->implode(','),
+                $book->reviews_count,
+            ]);
+        }
+
+        return response($csv->getContent(), 200)
+            ->withHeaders([
+                'Content-Encoding' => 'none',
+                'Content-Type' => 'text/csv; charset=UTF-8',
+                'Content-Disposition' => 'attachment; filename="' . $fileName . '.csv"',
+                'Content-Description' => 'File Transfer',
+            ]);
+    }
+
+    /**
+     * @param array $searchParams
+     * @return Builder
+     */
+    protected function getSearchedBooks(array $searchParams): Builder
+    {
+        $books = Book::with(['author', 'categories'])->withCount('reviews');
+
+        if (isset($searchParams['title'])) {
+            $books->where('title', 'like', "%{$searchParams['title']}%");
+        }
+
+        if (isset($searchParams['price'])) {
+            $books->where('price', 'like', "%{$searchParams['price']}%");
+        }
+
+        if (isset($searchParams['published_at_from'])) {
+            $books->where('published_at', '>=', $searchParams['published_at_from']);
+        }
+
+        if (isset($searchParams['published_at_to'])) {
+            $books->where('published_at', '<=', $searchParams['published_at_to']);
+        }
+
+        if (isset($searchParams['author'])) {
+            $books->where('author_id', $searchParams['author']);
+        }
+
+        if (isset($searchParams['category'])) {
+            $books->whereHas('categories', function (Builder $query) use ($searchParams) {
+                $query->where('id', $searchParams['category']);
+            });
+        }
+
+        return $books;
     }
 }

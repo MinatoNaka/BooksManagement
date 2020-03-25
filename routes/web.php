@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('books', 'BookController@index')->name('books.index');
     Route::post('books', 'BookController@store')->name('books.store');
     Route::get('books/create', 'BookController@create')->name('books.create');
+    Route::get('books/export', 'BookController@export')->name('books.export');
     Route::delete('books/{book}', 'BookController@destroy')->name('books.destroy')->middleware('can:delete,book');
     Route::put('books/{book}', 'BookController@update')->name('books.update')->middleware('can:update,book');
     Route::get('books/{book}', 'BookController@show')->name('books.show')->middleware('can:view,book');

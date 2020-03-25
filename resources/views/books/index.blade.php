@@ -57,6 +57,9 @@
                             <div class="card">
                                 <div class="card-header">本一覧</div>
                                 <div class="card-body">
+                                    <div class="mb-3">
+                                        <a href="{{ route('books.export', request()->all()) }}" class="btn btn-sm btn-primary" type="button">ダウンロード</a>
+                                    </div>
                                     <table class="table table-responsive-sm table-striped">
                                         <thead>
                                         <tr>
