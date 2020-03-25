@@ -59,7 +59,7 @@
                                                        class="btn btn-sm btn-outline-info" type="button">詳細</a>
                                                     <a href="{{ route('users.edit', $user) }}"
                                                        class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
                                                     {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                                     {{ Form::close() }}
                                                 </td>

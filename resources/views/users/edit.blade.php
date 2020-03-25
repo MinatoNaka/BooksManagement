@@ -105,7 +105,7 @@
             </div>
         </div>
     </div>
-    {{ Form::open(['method' => 'DELETE', 'route' => ['users.avatar.destroy', $user], 'v-on:submit="confirm"', 'id' => 'destroy-avatar-form']) }}
+    {{ Form::open(['method' => 'DELETE', 'route' => ['users.avatar.destroy', $user], 'v-on:submit' => 'confirm', 'id' => 'destroy-avatar-form']) }}
     {{ Form::close() }}
 @endsection
 

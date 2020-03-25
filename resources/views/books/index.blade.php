@@ -97,7 +97,7 @@
                                                            class="btn btn-sm btn-outline-success" type="button">編集</a>
                                                     @endcan
                                                     @can('delete', $book)
-                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['books.destroy', $book], 'class' => 'd-inline', 'v-on:submit="confirm"']) }}
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['books.destroy', $book], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
                                                         {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                                         {{ Form::close() }}
                                                     @endcan
