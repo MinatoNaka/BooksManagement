@@ -118,7 +118,7 @@ class BookService
             ->withHeaders([
                 'Content-Encoding' => 'none',
                 'Content-Type' => 'text/csv; charset=UTF-8',
-                'Content-Disposition' => 'attachment; filename="' . $fileName . '.csv"',
+                'Content-Disposition' => "attachment; filename={$fileName}",
                 'Content-Description' => 'File Transfer',
             ]);
     }

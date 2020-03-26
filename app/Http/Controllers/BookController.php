@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImportBookRequest;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
@@ -126,12 +127,11 @@ class BookController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param ImportBookRequest $request
      * @return RedirectResponse
      */
-    public function import(Request $request): RedirectResponse
+    public function import(ImportBookRequest $request): RedirectResponse
     {
-        //todo バリデーション
         $this->service->import($request->file('csv'));
 
         flash('本が？件登録されました。')->success();

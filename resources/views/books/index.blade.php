@@ -62,7 +62,11 @@
                                            class="btn btn-sm btn-primary" type="button">ダウンロード</a>
                                         {{ Form::open(['route' => 'books.import', 'files' => true, 'id' => 'import-form', 'class' => 'd-inline']) }}
                                         {{ Form::label('csv', 'アップロード', ['class' => 'btn btn-sm btn-danger mb-0']) }}
-                                        {{ Form::file('csv', ['id' => 'csv', 'class' => 'd-none', 'v-on:change' => 'submitImport']) }}
+                                        {{ Form::file('csv', ['id' => 'csv', 'v-on:change' => 'submitImport', 'class' => ($errors->has('csv')) ? 'd-none is-invalid': 'd-none']) }}
+                                        @error('csv')
+                                        <span class="invalid-feedback"
+                                              role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
                                         {{ Form::close() }}
                                     </div>
                                     <table class="table table-responsive-sm table-striped">
