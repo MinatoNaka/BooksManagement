@@ -124,4 +124,19 @@ class BookController extends Controller
     {
         return $this->service->export($request->all());
     }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function import(Request $request): RedirectResponse
+    {
+        //todo バリデーション
+        $this->service->import($request->file('csv'));
+
+        flash('本が？件登録されました。')->success();
+        //todo 登録された件数
+
+        return redirect()->route('books.index');
+    }
 }

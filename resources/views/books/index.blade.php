@@ -58,7 +58,12 @@
                                 <div class="card-header">本一覧</div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <a href="{{ route('books.export', request()->all()) }}" class="btn btn-sm btn-primary" type="button">ダウンロード</a>
+                                        <a href="{{ route('books.export', request()->all()) }}"
+                                           class="btn btn-sm btn-primary" type="button">ダウンロード</a>
+                                        {{ Form::open(['route' => 'books.import', 'files' => true, 'id' => 'import-form', 'class' => 'd-inline']) }}
+                                        {{ Form::label('csv', 'アップロード', ['class' => 'btn btn-sm btn-danger mb-0']) }}
+                                        {{ Form::file('csv', ['id' => 'csv', 'class' => 'd-none', 'v-on:change' => 'submitImport']) }}
+                                        {{ Form::close() }}
                                     </div>
                                     <table class="table table-responsive-sm table-striped">
                                         <thead>

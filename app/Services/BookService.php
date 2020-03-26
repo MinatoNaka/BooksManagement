@@ -10,7 +10,9 @@ use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
 use League\Csv\CannotInsertRecord;
+use League\Csv\Reader;
 use League\Csv\Writer;
 use SplTempFileObject;
 use Throwable;
@@ -91,7 +93,7 @@ class BookService
     public function export(array $searchParams): Response
     {
         $fileName = 'books_' . now()->format('YmdHis') . '.csv';
-        $header = ['ID', 'タイトル', '概要', '著者', '出版日', '価格', 'カテゴリー', 'レビュー数'];
+        $header = ['ID', 'タイトル', '概要', '著者', '著者ID', '出版日', '価格', 'カテゴリー', 'カテゴリーID', 'レビュー数'];
         $books = $this->getSearchedBooks($searchParams)->get();
 
         $csv = Writer::createFromFileObject(new SplTempFileObject());
@@ -103,9 +105,11 @@ class BookService
                 $book->title,
                 $book->description,
                 $book->author->name,
+                $book->author_id,
                 $book->formatted_published_at,
                 $book->price,
                 $book->categories->pluck('name')->implode(','),
+                $book->categories->pluck('id')->implode(','),
                 $book->reviews_count,
             ]);
         }
@@ -117,6 +121,35 @@ class BookService
                 'Content-Disposition' => 'attachment; filename="' . $fileName . '.csv"',
                 'Content-Description' => 'File Transfer',
             ]);
+    }
+
+    /**
+     * @param UploadedFile $csv
+     * @return bool
+     */
+    public function import(UploadedFile $csv): bool
+    {
+        $rows = Reader::createFromPath($csv->getPathname())->setHeaderOffset(0);
+        //todo ファイルフォーマットチェック
+
+        //todo トランザクション
+        foreach ($rows as $row) {
+            // todo １レコードごとにバリデーション
+
+            $book = Book::updateOrCreate(
+                ['id' => $row['ID']],
+                [
+                    'title' => $row['タイトル'],
+                    'description' => $row['概要'],
+                    'author_id' => $row['著者ID'],
+                    'published_at' => $row['出版日'],
+                    'price' => $row['価格'],
+                ]);
+
+            $book->categories()->sync(explode(',', $row['カテゴリーID']));
+        }
+
+        return true;
     }
 
     /**

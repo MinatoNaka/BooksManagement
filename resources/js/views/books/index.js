@@ -7,6 +7,9 @@ const app = new Vue({
             }
 
             event.preventDefault();
+        },
+        submitImport: function () {
+            $('#import-form').submit();
         }
     }
 });
