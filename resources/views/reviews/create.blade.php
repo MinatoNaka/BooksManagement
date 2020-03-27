@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">レビュー登録</div>
-                                {{ Form::open(['route' => ['books.reviews.store', $book], 'class' => 'form-horizontal']) }}
+                                {{ Form::open(['route' => ['books.reviews.store', $book], 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('comment', 'コメント', ['class' => 'col-md-3 col-form-label']) }}
@@ -68,3 +68,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/views/reviews/create.js') }}" defer></script>
+@endpush

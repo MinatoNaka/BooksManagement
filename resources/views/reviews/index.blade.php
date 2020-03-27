@@ -42,7 +42,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-header">検索</div>
-                                {{ Form::open(['method' => 'GET', 'route' => ['books.reviews.index', $book], 'class' => 'form-horizontal']) }}
+                                {{ Form::open(['method' => 'GET', 'route' => ['books.reviews.index', $book], 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('reviewer', 'レビュワー', ['class' => 'col-md-2 col-form-label']) }}

@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">ユーザ登録</div>
-                                {{ Form::open(['route' => 'users.store', 'files' => true, 'class' => 'form-horizontal']) }}
+                                {{ Form::open(['route' => 'users.store', 'files' => true, 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('name', 'ユーザ名', ['class' => 'col-md-3 col-form-label']) }}
@@ -82,3 +82,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/views/users/create.js') }}" defer></script>
+@endpush

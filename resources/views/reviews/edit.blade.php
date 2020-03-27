@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">レビュー編集</div>
-                                {{ Form::model($review, ['method' => 'PUT', 'route' => ['reviews.update', $review], 'class' => 'form-horizontal']) }}
+                                {{ Form::model($review, ['method' => 'PUT', 'route' => ['reviews.update', $review], 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('id', 'ID', ['class' => 'col-md-3 col-form-label']) }}
@@ -98,3 +98,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/views/reviews/edit.js') }}" defer></script>
+@endpush

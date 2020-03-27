@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">本編集</div>
-                                {{ Form::model($book, ['method' => 'PUT', 'route' => ['books.update', $book], 'class' => 'form-horizontal']) }}
+                                {{ Form::model($book, ['method' => 'PUT', 'route' => ['books.update', $book], 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('id', 'ID', ['class' => 'col-md-3 col-form-label']) }}
@@ -115,3 +115,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/views/books/edit.js') }}" defer></script>
+@endpush

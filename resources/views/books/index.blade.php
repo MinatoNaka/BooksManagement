@@ -15,7 +15,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">検索</div>
-                                {{ Form::open(['method' => 'GET', 'route' => 'books.index', 'files' => true, 'class' => 'form-horizontal']) }}
+                                {{ Form::open(['method' => 'GET', 'route' => 'books.index', 'files' => true, 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('title', 'タイトル', ['class' => 'col-md-2 col-form-label']) }}
@@ -59,7 +59,7 @@
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <a href="{{ route('books.export', request()->all()) }}"
-                                           class="btn btn-sm btn-primary" type="button">ダウンロード</a>
+                                           class="btn btn-sm btn-primary" type="button" v-on:click="preventDoubleClick">ダウンロード</a>
                                         {{ Form::open(['route' => 'books.import', 'files' => true, 'id' => 'import-form', 'class' => 'd-inline']) }}
                                         {{ Form::label('csv', 'アップロード', ['class' => 'btn btn-sm btn-danger mb-0']) }}
                                         {{ Form::file('csv', ['id' => 'csv', 'v-on:change' => 'submitImport', 'class' => ($errors->has('csv')) ? 'd-none is-invalid': 'd-none']) }}

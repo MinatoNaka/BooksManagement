@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">カテゴリー登録</div>
-                                {{ Form::open(['route' => 'categories.store', 'class' => 'form-horizontal']) }}
+                                {{ Form::open(['route' => 'categories.store', 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('name', 'カテゴリー名', ['class' => 'col-md-3 col-form-label']) }}
@@ -40,3 +40,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ mix('js/views/categories/create.js') }}" defer></script>
+@endpush

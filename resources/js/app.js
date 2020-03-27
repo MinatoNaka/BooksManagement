@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+window.mixins = require('./mixins');
 
 window.Vue = require('vue');
 

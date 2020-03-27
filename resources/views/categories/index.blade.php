@@ -15,7 +15,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">検索</div>
-                                {{ Form::open(['method' => 'GET', 'route' => 'categories.index', 'files' => true, 'class' => 'form-horizontal']) }}
+                                {{ Form::open(['method' => 'GET', 'route' => 'categories.index', 'files' => true, 'class' => 'form-horizontal', 'v-on:submit' => 'preventDoubleSubmit']) }}
                                 <div class="card-body">
                                     <div class="form-group row">
                                         {{ Form::label('name', 'カテゴリー名', ['class' => 'col-md-2 col-form-label']) }}
