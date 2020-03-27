@@ -16,6 +16,7 @@ use League\Csv\Reader;
 use League\Csv\Writer;
 use SplTempFileObject;
 use Throwable;
+use Validator;
 
 class BookService
 {
@@ -125,31 +126,90 @@ class BookService
 
     /**
      * @param UploadedFile $csv
-     * @return bool
+     * @return array
      */
-    public function import(UploadedFile $csv): bool
+    public function import(UploadedFile $csv): array
     {
         $rows = Reader::createFromPath($csv->getPathname())->setHeaderOffset(0);
-        //todo ファイルフォーマットチェック
 
-        //todo トランザクション
-        foreach ($rows as $row) {
-            // todo １レコードごとにバリデーション
-
-            $book = Book::updateOrCreate(
-                ['id' => $row['ID']],
-                [
-                    'title' => $row['タイトル'],
-                    'description' => $row['概要'],
-                    'author_id' => $row['著者ID'],
-                    'published_at' => $row['出版日'],
-                    'price' => $row['価格'],
-                ]);
-
-            $book->categories()->sync(explode(',', $row['カテゴリーID']));
+        if (!$this->isValidFormat($rows)) {
+            return [
+                'result' => false,
+                'errorMessages' => 'ヘッダーカラム数が正しくありません。<br>ダウンロードしたファイルのフォーマットを利用してください。',
+            ];
         }
 
-        return true;
+        $errorMessages = $this->validateRow($rows);
+
+        if ($errorMessages) {
+            return [
+                'result' => false,
+                'errorMessages' => $errorMessages,
+            ];
+        }
+
+        DB::transaction(function () use ($rows) {
+            foreach ($rows as $index => $row) {
+                $book = Book::updateOrCreate(
+                    ['id' => $row['ID']],
+                    [
+                        'title' => $row['タイトル'],
+                        'description' => $row['概要'],
+                        'author_id' => $row['著者ID'],
+                        'published_at' => $row['出版日'],
+                        'price' => $row['価格'],
+                    ]
+                );
+
+                $book->categories()->sync(explode(',', $row['カテゴリーID']));
+            }
+        });
+
+        return [
+            'result' => true,
+            'rowCount' => count($rows),
+        ];
+    }
+
+    /**
+     * @param Reader $rows
+     * @return bool
+     */
+    private function isValidFormat(Reader $rows): bool
+    {
+        $expectHeader = ['ID', 'タイトル', '概要', '著者', '著者ID', '出版日', '価格', 'カテゴリー', 'カテゴリーID', 'レビュー数'];
+        $actualHeader = $rows->getHeader();
+
+        return $expectHeader === $actualHeader;
+    }
+
+    /**
+     * @param Reader $rows
+     * @return string
+     */
+    private function validateRow(Reader $rows): string
+    {
+        $errorMessages = '';
+
+        // 負荷が大きい場合はbulk-importする
+        foreach ($rows as $index => $row) {
+            $validator = Validator::make($row, [
+                'タイトル' => ['required', 'max:255'],
+                '概要' => ['required', 'max:1000'],
+                '出版日' => ['required', 'date'],
+                '価格' => ['required', 'digits_between:0,10'],
+                '著者ID' => ['required', 'exists:users,id'],
+                'カテゴリーID' => ['exists:categories,id'],
+            ]);
+
+            if ($validator->fails()) {
+                foreach ($validator->errors()->all() as $error) {
+                    $errorMessages .= sprintf('%s行目：%s<br>', $index, $error);
+                }
+            }
+        }
+
+        return $errorMessages;
     }
 
     /**

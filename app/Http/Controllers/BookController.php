@@ -132,10 +132,16 @@ class BookController extends Controller
      */
     public function import(ImportBookRequest $request): RedirectResponse
     {
-        $this->service->import($request->file('csv'));
+        $result = $this->service->import($request->file('csv'));
 
-        flash('本が？件登録されました。')->success();
-        //todo 登録された件数
+        if (!$result['result']) {
+            flash('本の登録ができませんでした。')->error();
+            flash($result['errorMessages'])->error();
+
+            return redirect()->route('books.index');
+        }
+
+        flash("本が{$result['rowCount']}件登録されました。")->success();
 
         return redirect()->route('books.index');
     }
