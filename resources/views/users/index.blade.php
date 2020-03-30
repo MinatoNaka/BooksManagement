@@ -27,6 +27,12 @@
                                             {{ Form::text('email', request('email'), ['id' => 'email', 'class' => 'form-control']) }}
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('role', 'ロール', ['class' => 'col-md-2 col-form-label']) }}
+                                        <div class="col-md-4">
+                                            {{ Form::select('role', $roles, request('role'), ['id' => 'role', 'class' => 'form-control', 'placeholder' => 'please select']) }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     {{ Form::submit('検索', ['class' => 'btn btn-sm btn-primary']) }}
@@ -44,6 +50,7 @@
                                             <th>@sortablelink('name', 'ユーザ名')</th>
                                             <th>@sortablelink('email', 'メールアドレス')</th>
                                             <th>@sortablelink('birthday', '生年月日')</th>
+                                            <th>ロール</th>
                                             <th>操作</th>
                                         </tr>
                                         </thead>
@@ -54,6 +61,7 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->formatted_birthday}}</td>
+                                                <td>{{ $user->getRole()->name }}</td>
                                                 <td>
                                                     <a href="{{ route('users.show', $user) }}"
                                                        class="btn btn-sm btn-outline-info" type="button">詳細</a>

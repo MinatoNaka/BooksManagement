@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Kyslik\ColumnSortable\Sortable;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Wildside\Userstamps\Userstamps;
 
@@ -55,6 +56,14 @@ class User extends Authenticatable
     public $sortable = [
         'id', 'name', 'email', 'birthday',
     ];
+
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
+    {
+        return $this->roles->first();
+    }
 
     /**
      * @return string

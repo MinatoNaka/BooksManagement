@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -32,7 +33,9 @@ class UserController extends Controller
     {
         $users = $this->service->getPagedUsers($request->all());
 
-        return view('users.index')->with(compact('users'));
+        $roles = Role::all()->pluck('name', 'name');
+
+        return view('users.index')->with(compact('users', 'roles'));
     }
 
     /**
