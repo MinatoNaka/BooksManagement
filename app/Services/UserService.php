@@ -16,7 +16,7 @@ class UserService
      */
     public function getPagedUsers(array $searchParams): LengthAwarePaginator
     {
-        $users = User::query();
+        $users = User::with('roles');
 
         if (isset($searchParams['name'])) {
             $users->where('name', 'like', "%{$searchParams['name']}%");
