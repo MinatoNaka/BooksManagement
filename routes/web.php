@@ -41,48 +41,48 @@ Route::group(['middleware' => 'auth'], function () {
     /* ------------------------------------------------------------------- *
      * User
      * ------------------------------------------------------------------- */
-    Route::get('users', 'UserController@index')->name('users.index');
-    Route::post('users', 'UserController@store')->name('users.store');
-    Route::get('users/create', 'UserController@create')->name('users.create');
-    Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
-    Route::put('users/{user}', 'UserController@update')->name('users.update');
-    Route::get('users/{user}', 'UserController@show')->name('users.show');
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
-    Route::delete('users/{user}/avatar', 'UserController@destroyAvatar')->name('users.avatar.destroy');
+    Route::get('users', 'UserController@index')->name('users.index')->middleware(['permission:user-view']);
+    Route::post('users', 'UserController@store')->name('users.store')->middleware(['permission:user-edit']);
+    Route::get('users/create', 'UserController@create')->name('users.create')->middleware(['permission:user-edit']);
+    Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')->middleware(['role:admin', 'permission:user-edit']);
+    Route::put('users/{user}', 'UserController@update')->name('users.update')->middleware(['permission:user-edit']);
+    Route::get('users/{user}', 'UserController@show')->name('users.show')->middleware(['permission:user-view']);
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware(['permission:user-edit']);
+    Route::delete('users/{user}/avatar', 'UserController@destroyAvatar')->name('users.avatar.destroy')->middleware(['permission:user-edit']);
 
     /* ------------------------------------------------------------------- *
      * Category
      * ------------------------------------------------------------------- */
-    Route::get('categories', 'CategoryController@index')->name('categories.index');
-    Route::post('categories', 'CategoryController@store')->name('categories.store');
-    Route::get('categories/create', 'CategoryController@create')->name('categories.create');
-    Route::delete('categories/{category}', 'CategoryController@destroy')->name('categories.destroy')->middleware('can:delete,category');
-    Route::put('categories/{category}', 'CategoryController@update')->name('categories.update')->middleware('can:update,category');
-    Route::get('categories/{category}', 'CategoryController@show')->name('categories.show')->middleware('can:view,category');
-    Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit')->middleware('can:update,category');
+    Route::get('categories', 'CategoryController@index')->name('categories.index')->middleware(['permission:category-view']);
+    Route::post('categories', 'CategoryController@store')->name('categories.store')->middleware(['permission:category-edit']);
+    Route::get('categories/create', 'CategoryController@create')->name('categories.create')->middleware(['permission:category-edit']);
+    Route::delete('categories/{category}', 'CategoryController@destroy')->name('categories.destroy')->middleware(['permission:category-edit', 'can:delete,category']);
+    Route::put('categories/{category}', 'CategoryController@update')->name('categories.update')->middleware(['permission:category-edit', 'can:update,category']);
+    Route::get('categories/{category}', 'CategoryController@show')->name('categories.show')->middleware(['permission:category-view', 'can:view,category']);
+    Route::get('categories/{category}/edit', 'CategoryController@edit')->name('categories.edit')->middleware(['permission:category-edit', 'can:update,category']);
 
     /* ------------------------------------------------------------------- *
      * Book
      * ------------------------------------------------------------------- */
-    Route::get('books', 'BookController@index')->name('books.index');
-    Route::post('books', 'BookController@store')->name('books.store');
-    Route::get('books/create', 'BookController@create')->name('books.create');
-    Route::get('books/export', 'BookController@export')->name('books.export');
-    Route::post('books/import', 'BookController@import')->name('books.import');
-    Route::delete('books/{book}', 'BookController@destroy')->name('books.destroy')->middleware('can:delete,book');
-    Route::put('books/{book}', 'BookController@update')->name('books.update')->middleware('can:update,book');
-    Route::get('books/{book}', 'BookController@show')->name('books.show')->middleware('can:view,book');
-    Route::get('books/{book}/edit', 'BookController@edit')->name('books.edit')->middleware('can:update,book');
+    Route::get('books', 'BookController@index')->name('books.index')->middleware(['permission:book-view']);
+    Route::post('books', 'BookController@store')->name('books.store')->middleware(['permission:book-edit']);
+    Route::get('books/create', 'BookController@create')->name('books.create')->middleware(['permission:book-edit']);
+    Route::get('books/export', 'BookController@export')->name('books.export')->middleware(['permission:book-view']);
+    Route::post('books/import', 'BookController@import')->name('books.import')->middleware(['permission:book-edit']);
+    Route::delete('books/{book}', 'BookController@destroy')->name('books.destroy')->middleware(['permission:book-edit', 'can:delete,book']);
+    Route::put('books/{book}', 'BookController@update')->name('books.update')->middleware(['permission:book-edit', 'can:update,book']);
+    Route::get('books/{book}', 'BookController@show')->name('books.show')->middleware(['permission:book-view', 'can:view,book']);
+    Route::get('books/{book}/edit', 'BookController@edit')->name('books.edit')->middleware(['permission:book-edit', 'can:update,book']);
 
     /* ------------------------------------------------------------------- *
      * Review
      * ------------------------------------------------------------------- */
-    Route::get('books/{book}/reviews', 'ReviewController@index')->name('books.reviews.index');
-    Route::post('books/{book}/reviews', 'ReviewController@store')->name('books.reviews.store');
-    Route::get('books/{book}/reviews/create', 'ReviewController@create')->name('books.reviews.create');
-    Route::delete('reviews/{review}', 'ReviewController@destroy')->name('reviews.destroy')->middleware('can:delete,review');
-    Route::put('reviews/{review}', 'ReviewController@update')->name('reviews.update')->middleware('can:update,review');
-    Route::get('reviews/{review}/edit', 'ReviewController@edit')->name('reviews.edit')->middleware('can:update,review');
+    Route::get('books/{book}/reviews', 'ReviewController@index')->name('books.reviews.index')->middleware(['permission:review-view']);
+    Route::post('books/{book}/reviews', 'ReviewController@store')->name('books.reviews.store')->middleware(['permission:review-edit']);
+    Route::get('books/{book}/reviews/create', 'ReviewController@create')->name('books.reviews.create')->middleware(['permission:review-edit']);
+    Route::delete('reviews/{review}', 'ReviewController@destroy')->name('reviews.destroy')->middleware(['permission:review-edit', 'can:delete,review']);
+    Route::put('reviews/{review}', 'ReviewController@update')->name('reviews.update')->middleware(['permission:review-edit', 'can:update,review']);
+    Route::get('reviews/{review}/edit', 'ReviewController@edit')->name('reviews.edit')->middleware(['permission:review-edit', 'can:update,review']);
 });
 
 
