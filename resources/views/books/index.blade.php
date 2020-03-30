@@ -58,16 +58,21 @@
                                 <div class="card-header">本一覧</div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <a href="{{ route('books.export', request()->all()) }}"
-                                           class="btn btn-sm btn-primary" type="button" v-on:click="preventDoubleClick">ダウンロード</a>
-                                        {{ Form::open(['route' => 'books.import', 'files' => true, 'id' => 'import-form', 'class' => 'd-inline']) }}
-                                        {{ Form::label('csv', 'アップロード', ['class' => 'btn btn-sm btn-danger mb-0']) }}
-                                        {{ Form::file('csv', ['id' => 'csv', 'v-on:change' => 'submitImport', 'class' => ($errors->has('csv')) ? 'd-none is-invalid': 'd-none']) }}
-                                        @error('csv')
-                                        <span class="invalid-feedback"
-                                              role="alert"><strong>{{ $message }}</strong></span>
-                                        @enderror
-                                        {{ Form::close() }}
+                                        @can('book-view')
+                                            <a href="{{ route('books.export', request()->all()) }}"
+                                               class="btn btn-sm btn-primary" type="button"
+                                               v-on:click="preventDoubleClick">ダウンロード</a>
+                                        @endcan
+                                        @can('book-edit')
+                                            {{ Form::open(['route' => 'books.import', 'files' => true, 'id' => 'import-form', 'class' => 'd-inline']) }}
+                                            {{ Form::label('csv', 'アップロード', ['class' => 'btn btn-sm btn-danger mb-0']) }}
+                                            {{ Form::file('csv', ['id' => 'csv', 'v-on:change' => 'submitImport', 'class' => ($errors->has('csv')) ? 'd-none is-invalid': 'd-none']) }}
+                                            @error('csv')
+                                            <span class="invalid-feedback"
+                                                  role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                            {{ Form::close() }}
+                                        @endcan
                                     </div>
                                     <table class="table table-responsive-sm table-striped">
                                         <thead>
@@ -97,19 +102,19 @@
                                                 </td>
                                                 <td>{{ $book->reviews_count }}</td>
                                                 <td>
-                                                    @can('view', $book)
+                                                    @if(Gate::check('book-view') && Gate::check('view', $book))
                                                         <a href="{{ route('books.show', $book) }}"
                                                            class="btn btn-sm btn-outline-info" type="button">詳細</a>
-                                                    @endcan
-                                                    @can('update', $book)
+                                                    @endif
+                                                    @if(Gate::check('book-edit') && Gate::check('update', $book))
                                                         <a href="{{ route('books.edit', $book) }}"
                                                            class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    @endcan
-                                                    @can('delete', $book)
+                                                    @endif
+                                                    @if(Gate::check('book-edit') && Gate::check('delete', $book))
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['books.destroy', $book], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
                                                         {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                                         {{ Form::close() }}
-                                                    @endcan
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -63,13 +63,19 @@
                                                 <td>{{ $user->formatted_birthday}}</td>
                                                 <td>{{ $user->getRole()->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('users.show', $user) }}"
-                                                       class="btn btn-sm btn-outline-info" type="button">詳細</a>
-                                                    <a href="{{ route('users.edit', $user) }}"
-                                                       class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    {{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
-                                                    {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
-                                                    {{ Form::close() }}
+                                                    @can('user-view')
+                                                        <a href="{{ route('users.show', $user) }}"
+                                                           class="btn btn-sm btn-outline-info" type="button">詳細</a>
+                                                    @endcan
+                                                    @can('user-edit')
+                                                        <a href="{{ route('users.edit', $user) }}"
+                                                           class="btn btn-sm btn-outline-success" type="button">編集</a>
+                                                    @endcan
+                                                    @can('user-edit')
+                                                        {{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
+                                                        {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
+                                                        {{ Form::close() }}
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

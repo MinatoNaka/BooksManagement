@@ -15,12 +15,16 @@
                 <i class="far fa-user c-sidebar-nav-icon"></i>User
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('users.index') }}">List</a>
-                </li>
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('users.create') }}">Create</a>
-                </li>
+                @can('user-view')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('users.index') }}">List</a>
+                    </li>
+                @endcan
+                @can('user-edit')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('users.create') }}">Create</a>
+                    </li>
+                @endcan
             </ul>
         </li>
         <li class="c-sidebar-nav-dropdown">
@@ -28,12 +32,16 @@
                 <i class="fas fa-tag c-sidebar-nav-icon"></i>Category
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('categories.index') }}">List</a>
-                </li>
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('categories.create') }}">Create</a>
-                </li>
+                @can('category-view')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('categories.index') }}">List</a>
+                    </li>
+                @endcan
+                @can('category-edit')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('categories.create') }}">Create</a>
+                    </li>
+                @endcan
             </ul>
         </li>
         <li class="c-sidebar-nav-dropdown">
@@ -41,12 +49,16 @@
                 <i class="fas fa-book-open c-sidebar-nav-icon"></i>Book
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('books.index') }}">List</a>
-                </li>
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link" href="{{ route('books.create') }}">Create</a>
-                </li>
+                @can('book-view')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('books.index') }}">List</a>
+                    </li>
+                @endcan
+                @can('book-edit')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ route('books.create') }}">Create</a>
+                    </li>
+                @endcan
             </ul>
         </li>
     </ul>

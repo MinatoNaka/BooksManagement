@@ -47,19 +47,19 @@
                                                 <td>{{ $category->id }}</td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>
-                                                    @can('view', $category)
+                                                    @if(Gate::check('category-view') && Gate::check('view', $category))
                                                         <a href="{{ route('categories.show', $category) }}"
                                                            class="btn btn-sm btn-outline-info" type="button">詳細</a>
-                                                    @endcan
-                                                    @can('update', $category)
+                                                    @endif
+                                                    @if(Gate::check('category-edit') && Gate::check('update', $category))
                                                         <a href="{{ route('categories.edit', $category) }}"
                                                            class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    @endcan
-                                                    @can('delete', $category)
+                                                    @endif
+                                                    @if(Gate::check('category-edit') && Gate::check('delete', $category))
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
                                                         {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                                         {{ Form::close() }}
-                                                    @endcan
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

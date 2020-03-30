@@ -92,15 +92,15 @@
                                                     @endfor
                                                 </td>
                                                 <td>
-                                                    @can('update', $review)
+                                                    @if(Gate::check('review-edit') && Gate::check('update', $review))
                                                         <a href="{{ route('reviews.edit', $review) }}"
                                                            class="btn btn-sm btn-outline-success" type="button">編集</a>
-                                                    @endcan
-                                                    @can('delete', $review)
+                                                    @endif
+                                                    @if(Gate::check('review-edit') && Gate::check('delete', $review))
                                                         {{ Form::open(['method' => 'DELETE', 'route' => ['reviews.destroy', $review], 'class' => 'd-inline', 'v-on:submit' => 'confirm']) }}
                                                         {{ Form::submit('削除', ['class' => 'btn btn-sm btn-outline-danger']) }}
                                                         {{ Form::close() }}
-                                                    @endcan
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -109,7 +109,10 @@
                                     {{ $reviews->appends(request()->except('page'))->links() }}
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ route('books.reviews.create', $book) }}" class="btn btn-sm btn-primary">レビュー登録</a>
+                                    @can('book-edit')
+                                        <a href="{{ route('books.reviews.create', $book) }}"
+                                           class="btn btn-sm btn-primary">レビュー登録</a>
+                                    @endcan
                                 </div>
                             </div>
                         </div>
