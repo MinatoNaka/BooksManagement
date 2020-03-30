@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
