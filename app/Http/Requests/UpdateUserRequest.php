@@ -34,6 +34,7 @@ class UpdateUserRequest extends FormRequest
             ],
             'birthday' => ['required', 'date'],
             'avatar' => ['image'],
+            'role' => ['required', 'exists:roles,name'],
         ];
     }
 
@@ -47,6 +48,7 @@ class UpdateUserRequest extends FormRequest
             'email' => 'メールアドレス',
             'birthday' => '生年月日',
             'avatar' => 'アバター',
+            'role' => 'ロール',
         ];
     }
 }

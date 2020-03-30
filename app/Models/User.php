@@ -101,6 +101,17 @@ class User extends Authenticatable
     }
 
     /**
+     * モデルバインドフォームにロールを表示する際のアクセサ
+     *
+     * @param $value
+     * @return string
+     */
+    public function formRoleAttribute($value): string
+    {
+        return $this->getRole()->name;
+    }
+
+    /**
      * @return HasMany
      */
     public function books(): HasMany

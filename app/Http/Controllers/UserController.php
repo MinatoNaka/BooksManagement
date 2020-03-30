@@ -68,7 +68,9 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        return view('users.edit')->with(compact('user'));
+        $roles = Role::all()->pluck('name', 'name');
+
+        return view('users.edit')->with(compact('user', 'roles'));
     }
 
     /**

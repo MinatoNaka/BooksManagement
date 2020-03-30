@@ -53,16 +53,19 @@ class UserService
     /**
      * @param User $user
      * @param array $params
-     * @return bool
+     * @return User
      */
-    public function update(User $user, array $params): bool
+    public function update(User $user, array $params): User
     {
         if (isset($params['avatar'])) {
             $avatarPath = Storage::disk('s3')->putFile('avatar', $params['avatar'], 'public');
             $params['avatar'] = $avatarPath;
         }
 
-        return $user->update($params);
+        $user->update($params);
+        $user->syncRoles($params['role']);
+
+        return $user;
     }
 
     /**
