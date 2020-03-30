@@ -44,7 +44,10 @@ class UserService
             $params['avatar'] = $avatarPath;
         }
 
-        return User::create($params);
+        $user = User::create($params);
+        $user->assignRole($params['role']);
+
+        return $user;
     }
 
     /**

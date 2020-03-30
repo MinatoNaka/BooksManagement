@@ -30,6 +30,7 @@ class StoreUserRequest extends FormRequest
             'password' => ['required', 'confirmed', new Password()],
             'birthday' => ['required', 'date'],
             'avatar' => ['image'],
+            'role' => ['required', 'exists:roles,name'],
         ];
     }
 
@@ -44,6 +45,7 @@ class StoreUserRequest extends FormRequest
             'password' => 'パスワード',
             'birthday' => '生年月日',
             'avatar' => 'アバター',
+            'role' => 'ロール',
         ];
     }
 }

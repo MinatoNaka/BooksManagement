@@ -68,6 +68,15 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        {{ Form::label('role', 'ロール', ['class' => 'col-md-3 col-form-label']) }}
+                                        <div class="col-md-9">
+                                            {{ Form::select('role', $roles, null, ['id' => 'role', 'class' => ($errors->has('role')) ? 'form-control is-invalid': 'form-control', 'placeholder' => 'please select']) }}
+                                            @error('role')
+                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     {{ Form::submit('登録', ['class' => 'btn btn-sm btn-primary']) }}
