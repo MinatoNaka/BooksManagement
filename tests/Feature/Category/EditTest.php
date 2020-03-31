@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Category;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use RolesAndPermissionsSeeder;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class StoreTest extends TestCase
+class EditTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -21,12 +22,9 @@ class StoreTest extends TestCase
      */
     private $adminRole;
     /**
-     * @var array
+     * @var Category
      */
-    private $validParams = [
-        'name' => 'テストカテゴリー名',
-    ];
-
+    private $category;
 
     protected function setUp(): void
     {
@@ -35,6 +33,7 @@ class StoreTest extends TestCase
         $this->seed(RolesAndPermissionsSeeder::class);
         $this->adminRole = Role::findByName('admin');
         $this->user = factory(User::class)->create();
+        $this->category = factory(Category::class)->create(['created_by' => $this->user->id]);
     }
 
     /**
@@ -45,8 +44,9 @@ class StoreTest extends TestCase
         $this->user->assignRole($this->adminRole);
 
         $this->actingAs($this->user)
-            ->post(route('categories.store', $this->validParams))
-            ->assertStatus(302);
+            ->get(route('categories.edit', $this->category))
+            ->assertStatus(200)
+            ->assertSee('カテゴリー編集');
     }
 
     /**
@@ -54,7 +54,7 @@ class StoreTest extends TestCase
      */
     public function test_guest_redirect(): void
     {
-        $this->post(route('categories.store'))
+        $this->get(route('categories.edit', $this->category))
             ->assertStatus(302)
             ->assertRedirect(route('login'));
     }
@@ -68,36 +68,32 @@ class StoreTest extends TestCase
         $this->user->assignRole($this->adminRole);
 
         $this->actingAs($this->user)
-            ->post(route('categories.store'))
+            ->get(route('categories.edit', $this->category))
             ->assertStatus(403);
     }
 
     /**
-     * 登録後、フラッシュメッセージをセッションにセット
+     * 自分がcreatorじゃない場合は403
      */
-    public function test_show_message(): void
+    public function test_no_creator_403(): void
     {
-        $this->user->assignRole($this->adminRole);
+        $user2 = factory(User::class)->create()->assignRole($this->adminRole);
 
-        $this->actingAs($this->user)
-            ->post(route('categories.store', $this->validParams))
-            ->assertStatus(302)
-            ->assertRedirect(route('categories.index'))
-            ->assertSessionHas('flash_notification');
+        $this->actingAs($user2)
+            ->get(route('categories.edit', $this->category))
+            ->assertStatus(403);
     }
 
     /**
-     * バリデーションエラーで登録画面にリダイレクト
+     * 対象データがフォームに表示される
      */
-    public function test_validate(): void
+    public function test_show_data(): void
     {
         $this->user->assignRole($this->adminRole);
-        $this->validParams['name'] = null;
 
         $this->actingAs($this->user)
-            ->withHeaders(['Referer' => route('categories.create')])
-            ->post(route('categories.store', $this->validParams))
-            ->assertStatus(302)
-            ->assertRedirect(route('categories.create'));
+            ->get(route('categories.edit', $this->category))
+            ->assertStatus(200)
+            ->assertSee($this->category->name);
     }
 }
