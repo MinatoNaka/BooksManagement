@@ -4,9 +4,20 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Jenssegers\Agent\Agent;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RejectIe
 {
+    /**
+     * @var Agent
+     */
+    private $agent;
+
+    public function __construct(Agent $agent)
+    {
+        $this->agent = $agent;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -16,10 +27,8 @@ class RejectIe
      */
     public function handle($request, Closure $next)
     {
-        $agent = new Agent();
-
-        if ($agent->isIE()) {
-            abort(400, 'IEは利用できません。他のブラウザでアクセスしてください。');
+        if ($this->agent->isIE()) {
+            throw new HttpException(400, 'IEは利用できません。他のブラウザでアクセスしてください。');
         }
 
         return $next($request);
