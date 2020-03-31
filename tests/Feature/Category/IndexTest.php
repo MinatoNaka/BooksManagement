@@ -40,7 +40,8 @@ class IndexTest extends TestCase
 
         $this->actingAs($this->user)
             ->get(route('categories.index'))
-            ->assertStatus(200);
+            ->assertStatus(200)
+            ->assertSee('カテゴリー一覧');
     }
 
     /**
