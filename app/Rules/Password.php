@@ -13,9 +13,9 @@ class Password implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
-        return preg_match('/\A[a-z\d]{8,16}+\z/i', $value);
+        return (bool)preg_match('/\A[a-z\d]{8,16}+\z/i', $value);
     }
 
     /**
