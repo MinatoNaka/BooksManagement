@@ -5,7 +5,9 @@ namespace Tests\Unit\Services;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use RolesAndPermissionsSeeder;
+use Storage;
 use Tests\TestCase;
 
 class UserServiceTest extends TestCase
@@ -125,7 +127,7 @@ class UserServiceTest extends TestCase
 
     // todo 他のカラムの検索
 
-    public function test_store()
+    public function test_store(): void
     {
         $this->seed(RolesAndPermissionsSeeder::class);
         $params = [
@@ -133,7 +135,6 @@ class UserServiceTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'birthday' => '2020-01-01',
-            // 'avatar' => ['image'], // todo 画像アップロードのテスト
             'role' => 'admin',
         ];
 
@@ -145,7 +146,26 @@ class UserServiceTest extends TestCase
         $this->assertSame($params['role'], $stored->getRole()->name);
     }
 
-    public function test_update()
+    public function test_store_avatar(): void
+    {
+        Storage::fake('s3');
+
+        $this->seed(RolesAndPermissionsSeeder::class);
+        $params = [
+            'name' => '名前',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'birthday' => '2020-01-01',
+            'role' => 'admin',
+            'avatar' => UploadedFile::fake()->image('test.png'),
+        ];
+
+        $stored = $this->SUT->store($params);
+
+        Storage::disk('s3')->assertExists($stored->avatar);
+    }
+
+    public function test_update(): void
     {
         $this->seed(RolesAndPermissionsSeeder::class);
 
@@ -171,7 +191,7 @@ class UserServiceTest extends TestCase
         $this->assertSame($params['role'], $updated->getRole()->name);
     }
 
-    public function test_destroy()
+    public function test_destroy(): void
     {
         $stored = factory(User::class)->create([
             'name' => '名前',
@@ -185,5 +205,26 @@ class UserServiceTest extends TestCase
         $this->assertTrue($stored->trashed());
     }
 
-    // todo destroyAvatarのテスト
+    public function test_destroyAvatar(): void
+    {
+        Storage::fake('s3');
+
+        $this->seed(RolesAndPermissionsSeeder::class);
+        $params = [
+            'name' => '名前',
+            'email' => 'test@example.com',
+            'password' => 'password',
+            'birthday' => '2020-01-01',
+            'role' => 'admin',
+            'avatar' => UploadedFile::fake()->image('test.png'),
+        ];
+
+        $stored = $this->SUT->store($params);
+        $storedAvatar = $stored->avatar;
+
+        $this->SUT->destroyAvatar($stored);
+
+        Storage::disk('s3')->assertMissing($storedAvatar);
+        $this->assertNull($stored->avatar);
+    }
 }
