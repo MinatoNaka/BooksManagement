@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\UserRegistered;
 use Mail;
 
-class SendUserRegisteredNotification
+class SendUserRegisteredMail
 {
     /**
      * @param UserRegistered $event
