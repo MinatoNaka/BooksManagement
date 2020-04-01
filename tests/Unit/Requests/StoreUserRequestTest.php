@@ -5,6 +5,7 @@ namespace Tests\Unit\Requests;
 
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use RolesAndPermissionsSeeder;
 use Tests\TestCase;
 use Validator;
@@ -26,7 +27,7 @@ class StoreUserRequestTest extends TestCase
         'password' => 'password',
         'password_confirmation' => 'password',
         'birthday' => '2020-01-01',
-        // 'avatar' => 'aa', // todo アバター画像のバリデーションテスト
+        'avatar' => null,
         'role' => 'admin',
     ];
 
@@ -35,6 +36,8 @@ class StoreUserRequestTest extends TestCase
         parent::setUp();
         $this->SUT = new StoreUserRequest();
         $this->seed(RolesAndPermissionsSeeder::class);
+
+        $this->validParams['avatar'] = UploadedFile::fake()->image('test.png');
     }
 
     public function test_validate_pass(): void

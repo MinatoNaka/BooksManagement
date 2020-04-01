@@ -14,7 +14,6 @@ class UpdateCategoryRequest extends FormRequest
     public function authorize()
     {
         return true;
-        //todo policy設定
     }
 
     /**
