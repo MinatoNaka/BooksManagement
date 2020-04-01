@@ -45,8 +45,9 @@ class StoreTest extends TestCase
         $this->user->assignRole($this->adminRole);
 
         $this->actingAs($this->user)
-            ->post(route('categories.store', $this->validParams))
-            ->assertStatus(302);
+            ->post(route('categories.store'), $this->validParams)
+            ->assertStatus(302)
+            ->assertRedirect(route('categories.index'));
     }
 
     /**
@@ -80,7 +81,7 @@ class StoreTest extends TestCase
         $this->user->assignRole($this->adminRole);
 
         $this->actingAs($this->user)
-            ->post(route('categories.store', $this->validParams))
+            ->post(route('categories.store'), $this->validParams)
             ->assertStatus(302)
             ->assertRedirect(route('categories.index'))
             ->assertSessionHas('flash_notification');
@@ -96,7 +97,7 @@ class StoreTest extends TestCase
 
         $this->actingAs($this->user)
             ->withHeaders(['Referer' => route('categories.create')])
-            ->post(route('categories.store', $this->validParams))
+            ->post(route('categories.store'), $this->validParams)
             ->assertStatus(302)
             ->assertRedirect(route('categories.create'));
     }
