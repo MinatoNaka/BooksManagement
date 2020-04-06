@@ -94,7 +94,7 @@
                                                 <td>{{ $book->title }}</td>
                                                 <td>{{ $book->formatted_published_at }}</td>
                                                 <td>{{ $book->price }}</td>
-                                                <td>{{ $book->author->name }}</td>
+                                                <td>{{ optional($book->author)->name }}</td>
                                                 <td>
                                                     @foreach($book->categories as $category)
                                                         {{ $category->name }}<br>
